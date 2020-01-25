@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <h1>World Quiz</h1>
-    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+    <div id="regions_div" style="width: 1200px; margin: 0 auto;"></div>
   </div>
 </template>
 
@@ -50,6 +50,8 @@ export default {
       );
 
         var options = {
+          colorAxis: {colors: ['#ccffcc', '#00ff00', '#008000']},
+          backgroundColor: '#81d4fa'
         };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
