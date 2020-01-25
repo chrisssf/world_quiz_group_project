@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       mapDataArray: [],
-      countriesOnMap: [['Country', 'Name']],
+      countriesOnMap: [['Country', 'Population']],
 
     }
   },
@@ -24,10 +24,10 @@ export default {
       // .then(() => console.log(this.mapDataArray[0]))
       .then(() => {
         // this.mapDataArray.forEach(country => this.countriesOnMap.push([country.alpha2Code, country.population]))
-        this.mapDataArray.forEach(country => this.countriesOnMap.push([country.alpha2Code, country.name]))
+        this.mapDataArray.forEach(country => this.countriesOnMap.push([{v: country.alpha2Code, f: country.name}, country.population]))
       })
       // .then(() => console.log(this.names))
-
+// [{v: 'IT', f: 'Italy'}, 2400000]
 
       google.charts.load('current', {
         'packages':['geochart'],
