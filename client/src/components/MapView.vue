@@ -6,12 +6,14 @@
 </template>
 
 <script>
+
+import apiKey from '../apikey.js'
 export default {
   name: "map-view",
   data() {
     return {
       mapDataArray: [],
-      countriesOnMap: [['Country', 'Name']]
+      countriesOnMap: [['Country', 'Name']],
 
     }
   },
@@ -23,7 +25,6 @@ export default {
       .then(() => {
         // this.mapDataArray.forEach(country => this.countriesOnMap.push([country.alpha2Code, country.population]))
         this.mapDataArray.forEach(country => this.countriesOnMap.push([country.alpha2Code, country.name]))
-
       })
       // .then(() => console.log(this.names))
 
@@ -32,7 +33,7 @@ export default {
         'packages':['geochart'],
         // Note: you will need to get a mapsApiKey for your project.
         // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
-        'mapsApiKey': 'AIzaSyCwa71ymq1yVfPG--aVyM0CaJdglL3Z7LE'
+        'mapsApiKey': apiKey
       });
 
       google.charts.setOnLoadCallback(drawRegionsMap);
