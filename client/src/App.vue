@@ -1,17 +1,25 @@
 <template>
   <div id="app">
     <map-view />
+    <selection-buttons/>
+    <questions/>
+    <answers/>
   </div>
 </template>
 
 <script>
 import MapView from './components/MapView.vue'
-
+import SelectionButtons from './components/SelectionButtons.vue'
+import Questions from './components/Questions.vue'
+import Answers from './components/Answer.vue'
 
 export default {
   name: 'app',
   components: {
     "map-view": MapView,
+    "selection-buttons": SelectionButtons,
+    "questions": Questions,
+    "answers": Answers
   }
 }
 </script>
