@@ -1,20 +1,14 @@
 <template>
   <div id="app">
-    <div class="map-container">
-      <div class="map-layout">
-        <map-view :questionData='questionData'/>
-      </div>
-      <div class="map-layout-box">
-        <country-info v-if='mapCountryInfo !== null' :mapCountryInfo='mapCountryInfo' />
-      </div>
+    <div class="layout-container">
+      <h1>World Quiz</h1>
+      <map-view :questionData='questionData'/>
+      <country-info v-if='mapCountryInfo !== null' :mapCountryInfo='mapCountryInfo' />
+      <selection-buttons/>
+      <questions/>
+      <answers/>
     </div>
 
-
-
-
-    <selection-buttons/>
-    <questions/>
-    <answers/>
   </div>
 </template>
 
@@ -65,21 +59,11 @@ export default {
   margin-top: 60px;
 }
 
-.map-container{
-  justify-content: center;
+.layout-container{
+  display: grid;
+  
 }
 
-.map-layout{
-  position: absolute;
-  z-index: -1
-}
-
-.map-layout-box{
-  position: relative;
-  z-index: 1;
-  left: 10px;
-top: 630px
-}
 
 
 </style>

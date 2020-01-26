@@ -1,8 +1,5 @@
-<template lang="html">
-  <div>
-    <h1>World Quiz</h1>
+<template lang="html">  
     <div id="regions_div" style="width: 1200px; margin: 0 auto;"></div>
-  </div>
 </template>
 
 <script>
@@ -68,7 +65,7 @@ export default {
   watch: {
     questionData: function() {
       this.countriesOnMap = [['Country'], [this.questionData]]
-      
+
     }
   }
 }
