@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <map-view />
+    <map-view/>
+    <country-info v-if='mapCountryInfo !== null' :mapCountryInfo='mapCountryInfo' />
     <selection-buttons/>
     <questions/>
     <answers/>
@@ -9,6 +10,7 @@
 
 <script>
 import MapView from './components/MapView.vue'
+import CountryInfo from './components/CountryInfo.vue'
 import SelectionButtons from './components/SelectionButtons.vue'
 import Questions from './components/Questions.vue'
 import Answers from './components/Answer.vue'
@@ -18,6 +20,7 @@ export default {
   name: 'app',
   components: {
     "map-view": MapView,
+    "country-info": CountryInfo,
     "selection-buttons": SelectionButtons,
     "questions": Questions,
     "answers": Answers
@@ -25,6 +28,7 @@ export default {
   data() {
     return {
       // "questionData": null;
+      mapCountryInfo: null
     }
   },
   mounted() {
@@ -34,7 +38,7 @@ export default {
     eventBus.$on('select-more-info', countryCode => {
       fetch("https://restcountries.eu/rest/v2/all")
         .then(res => res.json())
-        .then(countries => console.log(countries))
+        .then(countries => this.mapCountryInfo = countries.find(country => country.alpha2Code === countryCode))
     })
   }
 }
