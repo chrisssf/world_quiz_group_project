@@ -8,7 +8,6 @@
     "seeds": "mongo < ./db/seed_data.js",
     "start": "node server.js"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
