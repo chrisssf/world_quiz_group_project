@@ -1,9 +1,14 @@
 <template lang="html">
-  <ul>
-    <li>Capital: {{mapCountryInfo.capital}}</li>
-    <li>Population: {{mapCountryInfo.population}}</li>
-    <li> <img class"small-flag" :src="mapCountryInfo.flag" alt="NoneApplicable"> </li>
-  </ul>
+  <div class="info-container">
+    <ul>
+      <li id="country-title">{{mapCountryInfo.name}}</li>
+      <li>Capital: {{mapCountryInfo.capital}}</li>
+      <li>Population: {{mapCountryInfo.population}}</li>
+      <li>Region: {{mapCountryInfo.subregion}}</li>
+      <li>Area: {{mapCountryInfo.area}}km²</li>
+      <li> <img class="small-flag" :src="mapCountryInfo.flag" alt="NoneApplicable"> </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -18,7 +23,24 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.info-container {
+  border: solid black 2px;
+  width: 20%;
+  text-align: left;
+  justify-content: space-around;
+}
+
+ul{
+  list-style: none;
+
+}
+
 .small-flag {
-  height: 20px
+  height: 30px;
+}
+
+#country-title {
+  text-decoration: underline;
+  margin-bottom: 2px;
 }
 </style>
