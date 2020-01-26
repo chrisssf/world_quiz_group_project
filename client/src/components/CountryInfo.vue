@@ -2,6 +2,7 @@
   <ul>
     <li>Capital: {{mapCountryInfo.capital}}</li>
     <li>Population: {{mapCountryInfo.population}}</li>
+    <li> <img :src="mapCountryInfo.flag" alt="NoneApplicable"> </li>
   </ul>
 </template>
 
