@@ -12,6 +12,7 @@ import MapView from './components/MapView.vue'
 import SelectionButtons from './components/SelectionButtons.vue'
 import Questions from './components/Questions.vue'
 import Answers from './components/Answer.vue'
+import {eventBus} from './main.js'
 
 export default {
   name: 'app',
@@ -20,6 +21,21 @@ export default {
     "selection-buttons": SelectionButtons,
     "questions": Questions,
     "answers": Answers
+  },
+  data() {
+    return {
+      // "questionData": null;
+    }
+  },
+  mounted() {
+    // eventBus.$on('country-quiz-selected', {
+    //   this.questionData = [{v: 'DE', f: 'Germany'}, ]
+    // })
+    eventBus.$on('select-more-info', countryCode => {
+      fetch("https://restcountries.eu/rest/v2/all")
+        .then(res => res.json())
+        .then(countries => console.log(countries))
+    })
   }
 }
 </script>

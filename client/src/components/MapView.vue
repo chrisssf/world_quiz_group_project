@@ -6,14 +6,15 @@
 </template>
 
 <script>
-
+import {eventBus} from '../main.js'
 import apiKey from '../apikey.js'
+
 export default {
   name: "map-view",
   data() {
     return {
       mapDataArray: [],
-      countriesOnMap: [['Country', 'Population']],
+      countriesOnMap: [['Country']],
 
     }
   },
@@ -24,7 +25,7 @@ export default {
       // .then(() => console.log(this.mapDataArray[0]))
       .then(() => {
         // this.mapDataArray.forEach(country => this.countriesOnMap.push([country.alpha2Code, country.population]))
-        this.mapDataArray.forEach(country => this.countriesOnMap.push([{v: country.alpha2Code, f: country.name}, country.population]))
+        this.mapDataArray.forEach(country => this.countriesOnMap.push([{v: country.alpha2Code, f: country.name}]))
       })
       // .then(() => console.log(this.names))
 // [{v: 'IT', f: 'Italy'}, 2400000]
@@ -59,14 +60,13 @@ export default {
         google.visualization.events.addListener(chart, 'select', function () {
           var selection = chart.getSelection();
           if (selection.length > 0) {
-            console.log(data.getValue(selection[0].row, 0));
+            eventBus.$emit('select-more-info', (data.getValue(selection[0].row, 0)))
           }
         });
         chart.draw(data, options);
       }
-  }
 }
-
+}
 </script>
 
 <style lang="css" scoped>
