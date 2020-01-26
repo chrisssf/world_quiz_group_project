@@ -28,6 +28,7 @@ export default {
   width: 20%;
   text-align: left;
   justify-content: space-around;
+  background-color: white;
 }
 
 ul{

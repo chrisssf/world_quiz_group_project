@@ -1,7 +1,17 @@
 <template>
   <div id="app">
-    <map-view :questionData='questionData'/>
-    <country-info v-if='mapCountryInfo !== null' :mapCountryInfo='mapCountryInfo' />
+    <div class="map-container">
+      <div class="map-layout">
+        <map-view :questionData='questionData'/>
+      </div>
+      <div class="map-layout-box">
+        <country-info v-if='mapCountryInfo !== null' :mapCountryInfo='mapCountryInfo' />
+      </div>
+    </div>
+
+
+
+
     <selection-buttons/>
     <questions/>
     <answers/>
@@ -38,8 +48,8 @@ export default {
 
     eventBus.$on('select-more-info', countryCode => {
       fetch("https://restcountries.eu/rest/v2/all")
-        .then(res => res.json())
-        .then(countries => this.mapCountryInfo = countries.find(country => country.alpha2Code === countryCode))
+      .then(res => res.json())
+      .then(countries => this.mapCountryInfo = countries.find(country => country.alpha2Code === countryCode))
     })
   }
 }
@@ -54,4 +64,22 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.map-container{
+  justify-content: center;
+}
+
+.map-layout{
+  position: absolute;
+  z-index: -1
+}
+
+.map-layout-box{
+  position: relative;
+  z-index: 1;
+  left: 10px;
+top: 630px
+}
+
+
 </style>
