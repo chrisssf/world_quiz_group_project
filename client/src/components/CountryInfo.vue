@@ -2,7 +2,7 @@
   <ul>
     <li>Capital: {{mapCountryInfo.capital}}</li>
     <li>Population: {{mapCountryInfo.population}}</li>
-    <li> <img :src="mapCountryInfo.flag" alt="NoneApplicable"> </li>
+    <li> <img class"small-flag" :src="mapCountryInfo.flag" alt="NoneApplicable"> </li>
   </ul>
 </template>
 
@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.small-flag {
+  height: 20px
+}
 </style>

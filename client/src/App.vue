@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <map-view/>
+    <map-view :questionData='questionData'/>
     <country-info v-if='mapCountryInfo !== null' :mapCountryInfo='mapCountryInfo' />
     <selection-buttons/>
     <questions/>
@@ -27,14 +27,15 @@ export default {
   },
   data() {
     return {
-      // "questionData": null;
+      questionData: null,
       mapCountryInfo: null
     }
   },
   mounted() {
-    // eventBus.$on('country-quiz-selected', {
-    //   this.questionData = [{v: 'DE', f: 'Germany'}, ]
-    // })
+    eventBus.$on('country-quiz-selected', () => {
+      this.questionData = 'Germany';
+    })
+
     eventBus.$on('select-more-info', countryCode => {
       fetch("https://restcountries.eu/rest/v2/all")
         .then(res => res.json())
