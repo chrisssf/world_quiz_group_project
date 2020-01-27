@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="button-choices">
+    <h2>Pick a Quiz</h2>
     <button type="button" @click="handleCountryClick" name="country-select-button">Countries</button>
     <button type="button" name="capital-select-button">Capitals</button>
   </div>
