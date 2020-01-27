@@ -1,7 +1,7 @@
 <template lang="html">
   <div v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
-    <p>That is {{ checkAnswer() }} </p>
+    <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer' class="far fa-thumbs-down fa-2x"></i></p>
     <button @click="handleNextQuestion" type="button" name="next-question">Next</button>
   </div>
 </template>
@@ -21,9 +21,9 @@ export default {
   methods: {
     checkAnswer() {
       if (this.selectedAnswer === this.correctAnswer) {
-        return "CORRECT"
+        return "Correct!"
       } else {
-        return "INCORRECT"
+        return "Try again"
       }
     },
     handleNextQuestion(){

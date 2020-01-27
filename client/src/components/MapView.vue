@@ -1,8 +1,5 @@
 <template lang="html">
-  <div>
-    <h1>World Quiz</h1>
     <div id="regions_div" style="width: 1200px; margin: 0 auto;"></div>
-  </div>
 </template>
 
 <script>
