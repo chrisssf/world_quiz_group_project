@@ -1,4 +1,4 @@
-<template lang="html">  
+<template lang="html">
     <div id="regions_div" style="width: 1200px; margin: 0 auto;"></div>
 </template>
 
@@ -10,24 +10,11 @@ export default {
   name: "map-view",
   data() {
     return {
-      mapDataArray: [],
-      countriesOnMap: [['Country']],
-
+      countries: this.countriesForMap,
     }
   },
-  props: ['questionData'],
+  props: ['countriesForMap'],
   mounted() {
-    fetch("https://restcountries.eu/rest/v2/all")
-    .then(res => res.json())
-    .then(countries => this.mapDataArray = countries)
-    // .then(() => console.log(this.mapDataArray[0]))
-    .then(() => {
-      // this.mapDataArray.forEach(country => this.countriesOnMap.push([country.alpha2Code, country.population]))
-      this.mapDataArray.forEach(country => this.countriesOnMap.push([{v: country.alpha2Code, f: country.name}]))
-    })
-    // .then(() => console.log(this.names))
-    // [{v: 'IT', f: 'Italy'}, 2400000]
-
     google.charts.load('current', {
       'packages':['geochart'],
       'mapsApiKey': apiKey
@@ -35,15 +22,12 @@ export default {
 
     google.charts.setOnLoadCallback(drawRegionsMap);
 
-    const countriesOnMap = this.countriesOnMap
-    // console.log(countriesOnMap);
+    const countriesOnMap = this.countriesForMap
+    countriesOnMap.unshift(['Country'])
+
     function drawRegionsMap() {
       var data = google.visualization.arrayToDataTable(
         countriesOnMap
-        // ['Country', 'Population'],
-        // ['CA', 500]
-        // [mapDataArray[0][0].name, mapDataArray[0][0].population],
-        // // [mapDataArray[0][13].name, mapDataArray[0][13].population]
       );
 
       var options = {
@@ -61,13 +45,8 @@ export default {
       });
       chart.draw(data, options);
     }
-  },
-  watch: {
-    questionData: function() {
-      this.countriesOnMap = [['Country'], [this.questionData]]
 
-    }
-  }
+  },
 }
 </script>
 
