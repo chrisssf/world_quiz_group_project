@@ -2,7 +2,7 @@
   <div v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
     <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer' class="far fa-thumbs-down fa-2x"></i></p>
-    <button @click="handleNextQuestion" type="button" name="next-question">Next</button>
+    <button class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
   </div>
 </template>
 
@@ -42,4 +42,27 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Green */
+.next {
+  border-color: #26c0d1;
+  color: #26c0d1;
+  margin-right: 10px
+}
+
+.next:hover {
+  background-color: #26c0d1;
+  color: white;
+}
+
 </style>

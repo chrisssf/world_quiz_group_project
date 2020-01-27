@@ -171,6 +171,10 @@ export default {
   }
 }
 
+.col-2{
+  text-align: center;
+}
+
 .map {
   position: relative;
   /* display: inline; */
