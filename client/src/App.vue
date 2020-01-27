@@ -39,7 +39,7 @@ export default {
       loaded: null,
       componentKey: 0,
       countries: [],
-      questionCounter: 0
+      questionCounter: 1
     }
   },
   computed: {
@@ -85,7 +85,7 @@ export default {
 
     eventBus.$on('country-quiz-selected', () => {
       // this.options = [["Germany"],["Australia"],["Canada"], ["Finland"]]
-      this.fetchData(3)
+      this.fetchData(0)
       // this.componentKey += 1
       // this.questionCounter
     })
@@ -94,6 +94,11 @@ export default {
       fetch("https://restcountries.eu/rest/v2/all")
       .then(res => res.json())
       .then(countries => this.mapCountryInfo = countries.find(country => country.alpha2Code === countryCode))
+    })
+
+    eventBus.$on('next-question', () => {
+      this.questionCounter += 1;
+      this.fetchData(this.questionCounter)
     })
   }
 }

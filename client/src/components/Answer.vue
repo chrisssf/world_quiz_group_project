@@ -2,6 +2,7 @@
   <div v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
     <p>That is {{ checkAnswer() }} </p>
+    <button @click="handleNextQuestion" type="button" name="next-question">Next</button>
   </div>
 </template>
 
@@ -23,12 +24,17 @@ export default {
       } else {
         return "INCORRECT"
       }
+    },
+    handleNextQuestion(){
+      
     }
   },
   mounted() {
     eventBus.$on('select-more-info', (selectedAnswer) => {
       this.selectedAnswer = selectedAnswer
     })
+
+    eventBus.$emit('next-question')
   }
 }
 </script>
