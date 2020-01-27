@@ -53,15 +53,19 @@ export default {
     }
   },
   methods: {
-    fetchData() {
+    fetchData(questionNumber) {
       CountryService.getCountries()
-        .then(countries => this.countries = countries)
-        // .then(() => console.log(this.countries[0]))
-        .then(() => this.question = this.countries[0].Question)
-        .then(() => this.options = this.countries[0].Options)
-        .then(() => this.correctAnswer = this.countries[0].Answer)
-
-
+        // .then(countries => countries)
+        .then((countries) => {
+          this.options = countries[questionNumber].Options
+          return countries
+        })
+        .then((countries) => {
+          this.question = countries[questionNumber].Question
+          return countries
+        })
+        .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
+        .then(() => this.componentKey += 1)
     }
   },
 
@@ -81,9 +85,9 @@ export default {
 
     eventBus.$on('country-quiz-selected', () => {
       // this.options = [["Germany"],["Australia"],["Canada"], ["Finland"]]
-      this.fetchData()
-      this.questionCounter
-      this.componentKey += 1
+      this.fetchData(3)
+      // this.componentKey += 1
+      // this.questionCounter
     })
 
     eventBus.$on('select-more-info', countryCode => {
