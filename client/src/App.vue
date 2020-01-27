@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <map-view v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
-    <country-info v-if='mapCountryInfo !== null && answer === null' :mapCountryInfo='mapCountryInfo' />
-    <selection-buttons/>
-    <questions v-if="this.answer"/>
-    <answers v-if="this.answer"/>
+    <div class="grid-container">
+      <h1 class="title">World Map</h1>
+      <map-view class="map" v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
+      <country-info class="map-info-box" v-if='mapCountryInfo !== null && answer === null' :mapCountryInfo='mapCountryInfo' />
+      <selection-buttons class="quiz-choices" />
+      <questions class="questions" v-if="this.answer"/>
+      <answers class="answers" v-if="this.answer"/>
+    </div>
   </div>
 </template>
 
@@ -85,11 +88,15 @@ export default {
   margin-top: 60px;
 }
 
-.layout-container{
-  display: grid;
-
+.map {
+  position: relative;
 }
 
+.map-info-box{
+  position: absolute;
+  left: 80px;
+  bottom: -105px;
+}
 
 
 </style>
