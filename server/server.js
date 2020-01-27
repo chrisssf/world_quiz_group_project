@@ -14,9 +14,10 @@ MongoClient.connect('mongodb://localhost:27017')
   .then((client) => {
     const db = client.db('quiz_questions');
     const countriesCollection = db.collection('countries');
-  //need to add in second collection 'capitals'
+    const capitalsCollection = db.collection('capitals');
+
   app.use( '/api/countries', createRouter( countriesCollection ));
-  //need to add in second url and createRouter 'capitals'
+  app.use( '/api/capitals', createRouter( capitalsCollection ));
 })
 .catch( console.error );
 
