@@ -4,7 +4,7 @@
     <country-info v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
     <selection-buttons/>
     <questions v-if="this.question" :question='question'/>
-    <answers v-if="this.options" :correctAnswer='correctAnswer'/>
+    <answers v-if="this.options" :selectedQuiz="selectedQuiz" :correctAnswer='correctAnswer'/>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import Questions from './components/Questions.vue'
 import Answers from './components/Answer.vue'
 import {eventBus} from './main.js'
 import CountryService from './services/CountriesService.js'
-
+import CapitalsService from './services/CapitalsService.js'
 
 
 export default {
@@ -39,7 +39,8 @@ export default {
       loaded: null,
       componentKey: 0,
       countries: [],
-      questionCounter: -1
+      questionCounter: -1,
+      selectedQuiz: null
     }
   },
   computed: {
@@ -55,17 +56,31 @@ export default {
   methods: {
     fetchData(questionNumber) {
       CountryService.getCountries()
-        // .then(countries => countries)
-        .then((countries) => {
-          this.options = countries[questionNumber].Options
-          return countries
-        })
-        .then((countries) => {
-          this.question = countries[questionNumber].Question
-          return countries
-        })
-        .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
-        .then(() => this.componentKey += 1)
+      // .then(countries => countries)
+      .then((countries) => {
+        this.options = countries[questionNumber].Options
+        return countries
+      })
+      .then((countries) => {
+        this.question = countries[questionNumber].Question
+        return countries
+      })
+      .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
+      .then(() => this.componentKey += 1)
+    },
+
+    fetchCapitalData(questionNumber) {
+      CapitalsService.getCapitals()
+      .then((capitals) => {
+        this.options = capitals[questionNumber].Options
+        return capitals
+      })
+      .then((capitals) => {
+        this.question = capitals[questionNumber].Question
+        return capitals
+      })
+      .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
+      .then(() => this.componentKey += 1)
     }
   },
 
@@ -84,10 +99,16 @@ export default {
 
 
     eventBus.$on('country-quiz-selected', () => {
+      this.selectedQuiz = "countries"
       // this.options = [["Germany"],["Australia"],["Canada"], ["Finland"]]
       this.fetchData(0)
       // this.componentKey += 1
       // this.questionCounter
+    })
+
+    eventBus.$on('capital-quiz-selected', () => {
+      this.selectedQuiz = "capitals"
+      this.fetchCapitalData(0)
     })
 
     eventBus.$on('select-more-info', countryCode => {
@@ -96,12 +117,19 @@ export default {
       .then(countries => this.mapCountryInfo = countries.find(country => country.alpha2Code === countryCode))
     })
 
-    eventBus.$on('next-question', () => {
+    eventBus.$on('next-question', (selectedQuiz) => {
       this.questionCounter += 1;
-      this.fetchData(this.questionCounter)
+      if (selectedQuiz === "countries"){
+        this.fetchData(this.questionCounter)
+      }
+      else if
+      (selectedQuiz === "capitals"){
+        this.fetchCapitalData(this.questionCounter)
+      }
     })
   }
 }
+
 </script>
 
 <style>

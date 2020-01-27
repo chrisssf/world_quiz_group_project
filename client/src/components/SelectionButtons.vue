@@ -2,7 +2,7 @@
   <div class="button-choices">
     <h2>Pick a Quiz</h2>
     <button type="button" @click="handleCountryClick" name="country-select-button">Countries</button>
-    <button type="button" name="capital-select-button">Capitals</button>
+    <button type="button" @click="handleCapitalClick" name="capital-select-button">Capitals</button>
   </div>
 </template>
 
@@ -14,10 +14,13 @@ export default {
   methods: {
     handleCountryClick() {
       eventBus.$emit('country-quiz-selected')
+    },
+    handleCapitalClick() {
+      eventBus.$emit('capital-quiz-selected')
     }
   }
 }
-</script>
+  </script>
 
 <style lang="css" scoped>
 </style>

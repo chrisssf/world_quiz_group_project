@@ -17,7 +17,7 @@ export default {
       selectedAnswer: null
     }
   },
-  props: ['correctAnswer'],
+  props: ['correctAnswer', 'selectedQuiz'],
   methods: {
     checkAnswer() {
       if (this.selectedAnswer === this.correctAnswer) {
@@ -27,7 +27,7 @@ export default {
       }
     },
     handleNextQuestion(){
-      eventBus.$emit('next-question')
+      eventBus.$emit('next-question', this.selectedQuiz)
     this.selectedAnswer = null
     }
   },
