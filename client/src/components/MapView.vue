@@ -31,7 +31,7 @@ export default {
       );
 
       var options = {
-        colorAxis: {colors: ['#ccffcc', '#00ff00', '#008000']},
+        colorAxis: {colors: ['#008000']},
         backgroundColor: '#81d4fa'
       };
 
