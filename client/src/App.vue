@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <map-view v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
-    <country-info v-if='mapCountryInfo !== null && answer === null' :mapCountryInfo='mapCountryInfo' />
+    <country-info v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
     <selection-buttons/>
-    <questions v-if="this.answer"/>
-    <answers v-if="this.answer"/>
+    <questions v-if="this.question" :question='question'/>
+    <answers v-if="this.options"/>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ import SelectionButtons from './components/SelectionButtons.vue'
 import Questions from './components/Questions.vue'
 import Answers from './components/Answer.vue'
 import {eventBus} from './main.js'
+import CountryService from './services/CountriesService.js'
 
 
 
@@ -29,21 +30,38 @@ export default {
   },
   data() {
     return {
-      answer: null,
+      question: null,
+      options: null,
+      correctAnswer: null,
       mapCountryInfo: null,
       mapDataArray: [],
       allCountriesForMap: [],
       loaded: null,
-      componentKey: 0
+      componentKey: 0,
+      countries: [],
+      questionCounter: 0
     }
   },
   computed: {
     countriesForMap: function() {
-      if (this.answer) {
-        return this.answer
+
+      if (this.options) {
+        return this.options
       } else {
         return this.allCountriesForMap
       }
+    }
+  },
+  methods: {
+    fetchData() {
+      CountryService.getCountries()
+        .then(countries => this.countries = countries)
+        // .then(() => console.log(this.countries[0]))
+        .then(() => this.question = this.countries[0].Question)
+        .then(() => this.options = this.countries[0].Options)
+        .then(() => this.correctAnswer = this.countries[0].Answer)
+
+
     }
   },
 
@@ -62,7 +80,9 @@ export default {
 
 
     eventBus.$on('country-quiz-selected', () => {
-      this.answer = [["Germany"],["Australia"],["Canada"], ["Finland"]]
+      // this.options = [["Germany"],["Australia"],["Canada"], ["Finland"]]
+      this.fetchData()
+      this.questionCounter
       this.componentKey += 1
     })
 
