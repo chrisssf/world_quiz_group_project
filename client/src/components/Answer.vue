@@ -17,16 +17,18 @@ export default {
       selectedAnswer: null
     }
   },
+  props: ['correctAnswer'],
   methods: {
     checkAnswer() {
-      if (this.selectedAnswer === "Germany") {
+      if (this.selectedAnswer === this.correctAnswer) {
         return "CORRECT"
       } else {
         return "INCORRECT"
       }
     },
     handleNextQuestion(){
-      
+      eventBus.$emit('next-question')
+    this.selectedAnswer = null
     }
   },
   mounted() {

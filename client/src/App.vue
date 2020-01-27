@@ -4,7 +4,7 @@
     <country-info v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
     <selection-buttons/>
     <questions v-if="this.question" :question='question'/>
-    <answers v-if="this.options"/>
+    <answers v-if="this.options" :correctAnswer='correctAnswer'/>
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
       loaded: null,
       componentKey: 0,
       countries: [],
-      questionCounter: 1
+      questionCounter: -1
     }
   },
   computed: {
