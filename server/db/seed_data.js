@@ -5,32 +5,32 @@ db.countries.insertMany([
 
   {
     "Question": "Which one of the countries above is France",
-    "Options": [['India'], ['Ukraine'], ['France'], ['Algeria']],
+    "Options": [[{v: "India", f: "?"}], [{v: "Ukraine", f: "?"}], [{v: "France", f: "?"}], [{v: "Algeria", f: "?"}]],
     "Answer": "France"
     //Should the answer be a string or the index of the array?
   },
 
   {
     "Question": "Which one of the countries above is Brazil?",
-    "Options": [["Mexico"], ["Canada"], ["Argentina"], ["Brazil"]],
+    "Options": [[{v: "Mexico", f: "?"}], [{v: "Canada", f: "?"}], [{v: "Argentina", f: "?"}], [{v: "Brazil", f: "?"}]],
     "Answer": "Brazil"
     //Should the answer be a string or the index of the array?
   },
   {
     "Question": "Which one of the countries above is China?",
-    "Options": [["India"], ["Australia"], ["Mongolia"], ["China"]],
+    "Options": [[{v: "India", f: "?"}], [{v: "Australia", f: "?"}], [{v: "Mongolia", f: "?"}], [{v: "China", f: "?"}]],
     "Answer": "China"
     //Should the answer be a string or the index of the array?
   },
   {
     "Question": "Which one of the countries above is Canada?",
-    "Options": [["Canada"], ["United States"], ["Mexico"], ["Greenland"]],
+    "Options": [[{v: "Canada", f: "?"}], [{v: "United States", f: "?"}], [{v: "Mexico", f: "?"}], [{v: "Greenland", f: "?"}]],
     "Answer": "Canada"
     //Should the answer be a string or the index of the array?
   },
   {
     "Question": "Which one of the countries above is Italy?",
-    "Options": [["Saudi Arabia"], ["Ukraine"], ["Italy"], ["Sweden"]],
+    "Options": [[{v: "Saudi Arabia", f: "?"}], [{v: "Ukraine", f: "?"}], [{v: "Italy", f: "?"}], [{v: "Sweden", f: "?"}]],
     "Answer": "Italy"
     //Should the answer be a string or the index of the array?
   }
