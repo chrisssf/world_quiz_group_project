@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="regions_div" style="width: 1200px; margin: 0 auto;"></div>
+    <div id="regions_div"></div>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ export default {
       );
 
       var options = {
-        colorAxis: {colors: ['#ccffcc', '#00ff00', '#008000']},
+        colorAxis: {colors: ['#008000']},
         backgroundColor: '#81d4fa'
       };
 
@@ -51,4 +51,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  #regions_div {
+    width: 100%;
+  }
 </style>

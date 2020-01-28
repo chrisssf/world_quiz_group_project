@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <div class="grid-container">
       <h1 class="title">
 
         <span id="W">W</span>
@@ -14,11 +13,17 @@
         <span id="P">P</span>
 
       </h1>
-      <map-view class="map" v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
-      <country-info class="map-info-box" v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
-      <selection-buttons class="quiz-choices"/>
-      <questions class="questions" v-if="this.question" :question='question'/>
-      <answers class="answers" v-if="this.options" :selectedQuiz="selectedQuiz" :correctAnswer='correctAnswer'/>
+    <div class="grid-container">
+      <div class="col-1">
+        <map-view class="map" v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
+      </div>
+      <div class="col-2">
+        <selection-buttons class="quiz-choices"/>
+        <questions class="questions" v-if="this.question" :question='question'/>
+        <answers class="answers" v-if="this.options" :selectedQuiz="selectedQuiz" :correctAnswer='correctAnswer'/>
+        <country-info class="map-info-box" v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
+
+      </div>
     </div>
   </div>
 </template>
@@ -152,22 +157,50 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   /* color: #2c3e50; */
-  margin-top: 60px;
+  margin-top: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+}
+
+@media (max-width: 1050px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col-2{
+  text-align: center;
+  justify-content: center;
 }
 
 .map {
   position: relative;
+  /* display: inline; */
+  /* width: 60%; */
 }
 
 .map-info-box{
+  margin: auto;
+  margin-top: 60px;
+}
+
+/* .map-info-box{
   position: absolute;
   left: 80px;
-  bottom: -105px;
+  bottom: 70px;
+} */
+
+.quiz-choices {
+  /* display: inline; */
+  /* width: 40%; */
 }
 
 .title {
+  padding-left: 30px;
   font-size: 3em;
 }
 
