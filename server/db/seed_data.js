@@ -56,52 +56,53 @@ db.countries.insertMany([
 db.capitals.insertMany([
   {
     "Question": "Which country's capital city is Madrid?",
-    "Options": [[{v: "India", f: "?"}], [{v: "Spain", f: "?"}], [{v: "France", f: "?"}], [{v: "Algeria", f: "?"}]],
+    "Options": [[{v: "India", f: "India"}], [{v: "Spain", f: "Spain"}], [{v: "France", f: "France"}], [{v: "Algeria", f: "Algeria"}]],
     "Answer": "Spain"
   },
   {
     "Question": "Which country's capital city is Brasilia?",
-    "Options": [[{v: "Mexico", f: "?"}], [{v: "Canada", f: "?"}], [{v: "Argentina", f: "?"}], [{v: "Brazil", f: "?"}]],
+    "Options": [[{v: "Mexico", f: "Mexico"}], [{v: "Canada", f: "Canada"}], [{v: "Argentina", f: "Argentina"}], [{v: "Brazil", f: "Brazil"}]],
     "Answer": "Brazil"
   },
   {
     "Question": "Which country's capital city is Canberra?",
-    "Options": [[{v: "India", f: "?"}], [{v: "Australia", f: "?"}], [{v: "Mongolia", f: "?"}], [{v: "China", f: "?"}]],
+    "Options": [[{v: "India", f: "India"}], [{v: "Australia", f: "Australia"}], [{v: "Mongolia", f: "Mongolia"}], [{v: "China", f: "China"}]],
     "Answer": "Australia"
   },
   {
     "Question": "Which country's capital city is Berlin?",
-    "Options": [[{v: "Canada", f: "?"}], [{v: "United States", f: "?"}], [{v: "Egypt", f: "?"}], [{v: "Germany", f: "?"}]],
+    "Options": [[{v: "Romania", f: "Romania"}], [{v: "United States", f: "United States"}], [{v: "Egypt", f: "Egypt"}], [{v: "Germany", f: "Germany"}]],
     "Answer": "Germany"
   },
   {
     "Question": "Which country's capital city is Stockholm?",
-    "Options": [[{v: "Saudi Arabia", f: "?"}], [{v: "Ukraine", f: "?"}], [{v: "Italy", f: "?"}], [{v: "Sweden", f: "?"}]],
+    "Options": [[{v: "Saudi Arabia", f: "Saudi Arabia"}], [{v: "Ukraine", f: "Ukraine"}], [{v: "Italy", f: "Italy"}], [{v: "Sweden", f: "Sweden"}]],
     "Answer": "Sweden"
-  }
+  },
   {
     "Question": "Which country's capital city is New Delhi?",
-    "Options": [[{v: "India", f: "?"}], [{v: "France", f: "?"}], [{v: "Germany", f: "?"}], [{v: "Turkey", f: "?"}]],
+    "Options": [[{v: "India", f: "India"}], [{v: "France", f: "France"}], [{v: "Germany", f: "Germany"}], [{v: "Turkey", f: "Turkey"}]],
     "Answer": "India"
   },
   {
     "Question": "Which country's capital city is Cairo?",
-    "Options": [[{v: "India", f: "?"}], [{v: "Egypt", f: "?"}], [{v: "Ukraine", f: "?"}], [{v: "Algeria", f: "?"}]],
+    "Options": [[{v: "India", f: "India"}], [{v: "Egypt", f: "Egypt"}], [{v: "Ukraine", f: "Ukraine"}], [{v: "Algeria", f: "Algeria"}]],
     "Answer": "Egypt"
   },
   {
     "Question": "Which country's capital city is Beijing?",
-    "Options": [[{v: "Thailand", f: "?"}], [{v: "Australia", f: "?"}], [{v: "China", f: "?"}], [{v: "Kazakhstan", f: "?"}]],
+    "Options": [[{v: "Thailand", f: "Thailand"}], [{v: "Australia", f: "Australia"}], [{v: "China", f: "China"}], [{v: "Kazakhstan", f: "Kazakhstan"}]],
     "Answer": "China"
   },
   {
     "Question": "Which country's capital city is Warsaw?",
-    "Options": [[{v: "Poland", f: "?"}], [{v: "Spain", f: "?"}], [{v: "France", f: "?"}], [{v: "Egypt", f: "?"}]],
+    "Options": [[{v: "Poland", f: "Poland"}], [{v: "Spain", f: "Spain"}], [{v: "France", f: "France"}], [{v: "Egypt", f: "Egypt"}]],
     "Answer": "Poland"
   },
   {
     "Question": "Which country's capital city is Lisbon?",
-    "Options": [[{v: "Portugal", f: "?"}], [{v: "Spain", f: "?"}], [{v: "France", f: "?"}], [{v: "Germany", f: "?"}]],
+    "Options": [[{v: "Portugal", f: "Portugal"}], [{v: "Turkey", f: "Turkey"}], [{v: "France", f: "France"}], [{v: "Germany", f: "Germany"}]],
     "Answer": "Portugal"
   }
+
 ]);
