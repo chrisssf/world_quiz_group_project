@@ -11,7 +11,7 @@
         <span id="M">M</span>
         <span id="A">A</span>
         <span id="P">P</span>
-
+        <span id="map-logo"><i class="fas fa-globe-americas"></i></span>
       </h1>
     <div class="grid-container">
       <div class="col-1">
@@ -157,6 +157,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: #F5F5F5; */
   /* color: #2c3e50; */
   margin-top: 20px;
 }
@@ -200,7 +201,8 @@ export default {
 }
 
 .title {
-  padding-left: 30px;
+  text-align: center;
+  /* padding-left: 30px; */
   font-size: 3em;
 }
 
@@ -245,6 +247,11 @@ color: #fff200;
 
 #P{
 color: #51ff1c;
+}
+
+#map-logo {
+  padding-left: 20px;
+  color: #57cfff;
 }
 
 </style>
