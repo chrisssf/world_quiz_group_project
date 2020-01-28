@@ -35,8 +35,6 @@ export default {
     eventBus.$on('select-more-info', (selectedAnswer) => {
       this.selectedAnswer = selectedAnswer
     })
-
-    eventBus.$emit('next-question')
   }
 }
 </script>

@@ -54,7 +54,7 @@ export default {
       loaded: null,
       componentKey: 0,
       countries: [],
-      questionCounter: -1,
+      questionCounter: 0,
       selectedQuiz: null
     }
   },
@@ -115,14 +115,13 @@ export default {
 
     eventBus.$on('country-quiz-selected', () => {
       this.selectedQuiz = "countries"
-      // this.options = [["Germany"],["Australia"],["Canada"], ["Finland"]]
+      this.questionCounter = 1
       this.fetchData(0)
-      // this.componentKey += 1
-      // this.questionCounter
     })
 
     eventBus.$on('capital-quiz-selected', () => {
       this.selectedQuiz = "capitals"
+      this.questionCounter = 1
       this.fetchCapitalData(0)
     })
 
@@ -133,7 +132,6 @@ export default {
     })
 
     eventBus.$on('next-question', (selectedQuiz) => {
-      this.questionCounter += 1;
       if (selectedQuiz === "countries"){
         this.fetchData(this.questionCounter)
       }
@@ -141,6 +139,8 @@ export default {
       (selectedQuiz === "capitals"){
         this.fetchCapitalData(this.questionCounter)
       }
+      this.questionCounter += 1;
+
     })
   }
 }
