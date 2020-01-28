@@ -25,7 +25,7 @@ export default {
 <style lang="css" scoped>
 .info-container {
   border: solid black 2px;
-  width: 20%;
+  width: 80%;
   text-align: left;
   justify-content: space-around;
   background-color: white;
