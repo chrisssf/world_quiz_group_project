@@ -1,5 +1,5 @@
 <template lang="html">
-    <div id="regions_div"></div>
+  <div id="regions_div"></div>
 </template>
 
 <script>
@@ -10,7 +10,7 @@ export default {
   name: "map-view",
   data() {
     return {
-      countries: this.countriesForMap,
+      countries: this.countriesForMap
     }
   },
   props: ['countriesForMap'],
@@ -23,17 +23,35 @@ export default {
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     const countriesOnMap = this.countriesForMap
-    countriesOnMap.unshift(['Country'])
+    countriesOnMap.unshift(['Country', '']);
 
     function drawRegionsMap() {
       var data = google.visualization.arrayToDataTable(
         countriesOnMap
       );
 
+
+    //   const definedColours = () => {
+    //     console.log("maybe");
+    //   if (countriesOnMap.length < 10) {
+    //     console.log("YAYYYYY", countriesOnMap.length)
+    //     return {colors: ['#283947']}
+    //     // return   {colors: ['red', 'green', 'blue', 'yellow'], values: [0, 1, 2, 3]}
+    //   } else {
+    //     console.log("BOOOOOO", countriesOnMap.length)
+    //     return {colors: ['#000000']}
+    //   }
+    // };
+
+
+
       var options = {
-        colorAxis: {colors: ['#008000']},
-        backgroundColor: '#81d4fa'
+        backgroundColor: '#81d4fa',
+      colorAxis: {colors: ['red', 'green', 'blue', 'yellow']},
+      legend: 'none'
       };
+
+
 
       var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
       // This function makes map areas selectable and displays area name in console
@@ -51,7 +69,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  #regions_div {
-    width: 100%;
-  }
+#regions_div {
+  width: 100%;
+}
 </style>
