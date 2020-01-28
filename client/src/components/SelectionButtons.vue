@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="button-choices">
-    <p>Click a country on the map to find out some more information!</p>
+    <p v-if="quizCurrentlySelected">Click a country on the map to find out some more information!</p>
     <p>Up for a challenge?</p>
     <p id="underline">Choose a quiz below:</p>
     <button class="btn success" type="button" @click="handleCountryClick" name="country-select-button">Countries</button>
@@ -13,12 +13,19 @@ import { eventBus } from '../main.js'
 
 export default {
   name: 'select-buttons',
+  data() {
+    return {
+      quizCurrentlySelected: true
+    }
+  },
   methods: {
     handleCountryClick() {
       eventBus.$emit('country-quiz-selected')
+      this.quizCurrentlySelected = false
     },
     handleCapitalClick() {
       eventBus.$emit('capital-quiz-selected')
+      this.quizCurrentlySelected = false
     }
   }
 }
