@@ -153,13 +153,17 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #F8F8ff;
+  color: #303030;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: #F5F5F5; */
   /* color: #2c3e50; */
-  margin-top: 20px;
+
 }
 
 .grid-container {
