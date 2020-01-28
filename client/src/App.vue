@@ -228,7 +228,7 @@ color: #ff2921;
 }
 
 #R{
-color: #fff200;
+color: #ebc634;
 }
 
 #L{
@@ -246,7 +246,7 @@ margin-left: 10px;
 }
 
 #A{
-color: #fff200;
+color: #ebc634;
 }
 
 #P{
