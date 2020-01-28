@@ -110,7 +110,7 @@ export default {
     .then(countries => this.mapDataArray = countries)
     .then(() => {
       // this.mapDataArray.forEach(country => this.allCountriesForMap.push([country.alpha2Code, country.numericCode]))
-      this.mapDataArray.forEach(country => this.allCountriesForMap.push([{v: country.alpha2Code, f: country.name}]))
+      this.mapDataArray.forEach((country, index )=> this.allCountriesForMap.push([{v: country.alpha2Code, f: country.name}, {v:index, f:""}]))
       // this.mapDataArray.forEach(country => this.allCountriesForMap.push([country.name]))
     })
     .then(() => {

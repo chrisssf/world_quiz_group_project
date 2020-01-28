@@ -47,7 +47,9 @@ export default {
 
       var options = {
         backgroundColor: '#81d4fa',
-      colorAxis: {colors: ['red', 'green', 'blue', 'yellow']},
+        colorAxis: {colors: ['green', 'darkgreen']},
+        // colorAxis: {colors: ['yellow', 'black', 'red']},
+      // colorAxis: {colors: ['red', 'green', 'blue', 'yellow']},
       legend: 'none'
       };
 
