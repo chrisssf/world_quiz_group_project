@@ -20,7 +20,7 @@
       <div class="col-2">
         <selection-buttons class="quiz-choices"/>
         <questions class="questions" v-if="this.question" :question='question'/>
-        <answers class="answers" v-if="this.options" :selectedQuiz="selectedQuiz" :correctAnswer='correctAnswer'/>
+        <answers class="answers" v-if="this.options" :selectedQuiz="selectedQuiz" :correctAnswer='correctAnswer' :questionCounter="questionCounter" />
         <country-info class="map-info-box" v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
 
       </div>
@@ -202,6 +202,14 @@ export default {
 .title {
   padding-left: 30px;
   font-size: 3em;
+}
+
+.questions{
+  margin-top: 70px;
+}
+
+.answers {
+  margin-top: 30px;
 }
 
 #W{

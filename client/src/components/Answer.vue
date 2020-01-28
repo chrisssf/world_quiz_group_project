@@ -1,8 +1,10 @@
 <template lang="html">
-  <div v-if="selectedAnswer">
+  <div class="answer-container" v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
     <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer' class="far fa-thumbs-down fa-2x"></i></p>
-    <button class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
+    <button v-if="questionCounter < 9" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
+    <div v-if="questionCounter === 9"> <p>Well done on completing the quiz!</p>
+    <a href="http://localhost:8080" class="btn next">Return home</a></div>
   </div>
 </template>
 
@@ -17,7 +19,7 @@ export default {
       selectedAnswer: null
     }
   },
-  props: ['correctAnswer', 'selectedQuiz'],
+  props: ['correctAnswer', 'selectedQuiz', 'questionCounter'],
   methods: {
     checkAnswer() {
       if (this.selectedAnswer === this.correctAnswer) {
@@ -41,6 +43,10 @@ export default {
 
 <style lang="css" scoped>
 
+p{
+  font-size: 1.5em;
+}
+
 .btn {
   border: 2px solid black;
   background-color: white;
@@ -55,12 +61,18 @@ export default {
 .next {
   border-color: #26c0d1;
   color: #26c0d1;
-  margin-right: 10px
+  margin-right: 10px;
+  text-decoration: none;
 }
 
 .next:hover {
   background-color: #26c0d1;
   color: white;
 }
+
+.answer-container a {
+  /* margin-top: 50px; */
+}
+
 
 </style>
