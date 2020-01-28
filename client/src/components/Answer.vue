@@ -4,41 +4,48 @@
     <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer' class="far fa-thumbs-down fa-2x"></i></p>
     <button v-if="questionCounter < 9" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
     <div v-if="questionCounter === 9"> <p>Well done on completing the quiz!</p>
-    <a href="http://localhost:8080" class="btn next">Return home</a></div>
-  </div>
-</template>
+      <a href="http://localhost:8080" class="btn next">Return home</a></div>
+    </div>
+  </template>
 
-<script>
-import { eventBus } from '../main.js'
+  <script>
+  import { eventBus } from '../main.js'
 
 
-export default {
-  name: 'answer',
-  data(){
-    return{
-      selectedAnswer: null
-    }
-  },
-  props: ['correctAnswer', 'selectedQuiz', 'questionCounter'],
-  methods: {
-    checkAnswer() {
-      if (this.selectedAnswer === this.correctAnswer) {
-        return "Correct!"
-      } else {
-        return "Try again"
+  export default {
+    name: 'answer',
+    data(){
+      return{
+        selectedAnswer: null
       }
     },
-    handleNextQuestion(){
-      eventBus.$emit('next-question', this.selectedQuiz)
-    this.selectedAnswer = null
+    props: ['correctAnswer', 'selectedQuiz', 'questionCounter'],
+    methods: {
+      checkAnswer() {
+        if (this.selectedAnswer === this.correctAnswer) {
+          return "Correct!"
+        } else {
+          return "Try again"
+        }
+      },
+      handleNextQuestion(){
+        eventBus.$emit('next-question', this.selectedQuiz)
+        this.selectedAnswer = null
+      }
+    },
+    mounted() {
+      eventBus.$on('select-more-info', (selectedAnswer) => {
+        this.selectedAnswer = selectedAnswer
+      })
+      eventBus.$on('country-quiz-selected', () => {
+        this.selectedAnswer = null
+      })
+      eventBus.$on('capital-quiz-selected', () => {
+        this.selectedAnswer = null
+      })
     }
-  },
-  mounted() {
-    eventBus.$on('select-more-info', (selectedAnswer) => {
-      this.selectedAnswer = selectedAnswer
-    })
   }
-}
+
 </script>
 
 <style lang="css" scoped>
