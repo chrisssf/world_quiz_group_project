@@ -21,7 +21,7 @@
       </div>
       <div class="col-2">
         <selection-buttons class="quiz-choices"/>
-        <questions class="questions" v-if="this.randomAnswer" :question='randomAnswer'/>
+        <questions class="questions" v-if="this.randomAnswer" :selectedQuiz='selectedQuiz' :question='randomAnswer'/>
         <answers class="answers" v-if="this.randomOptions" :selectedQuiz="selectedQuiz" :correctAnswer='randomAnswer' :randomCountries="randomCountries" :questionCounter="questionCounter" />
         <country-info class="map-info-box" v-if='mapCountryInfo !== null && randomOptions === null' :mapCountryInfo='mapCountryInfo' />
 
