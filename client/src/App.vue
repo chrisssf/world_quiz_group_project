@@ -120,7 +120,7 @@ export default {
 
         const randomCountries = []
         while (randomCountries.length < 4 ) {
-          const randomIndex = Math.floor(Math.random() * 251);
+          const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length - 1));
           // if this.mapDataArray
           const randomCountry = this.mapDataArray[randomIndex]
           console.log(randomCountry.area, randomIndex, randomCountry.name);
