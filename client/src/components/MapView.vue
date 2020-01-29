@@ -24,36 +24,38 @@ export default {
 
     const countriesOnMap = this.countriesForMap
 
+    //
+    // const definedPropertyAndColours = () =>{
+    //   if (countriesOnMap.length < 5) {
+    //     console.log('yes');
+    //     countriesOnMap.unshift(['Country', '']);
+    //
+    //   } else {
+    //     console.log('nae');
+    //     countriesOnMap.unshift(['Country']);
+    //   }
+    // }
+    //
+    // definedPropertyAndColours()
 
-    const definedPropertyAndColours = () =>{
-      if (countriesOnMap.length < 5) {
-        console.log('yes');
-        countriesOnMap.unshift(['Country', '']);
-
-      } else {
-        console.log('nae');
-        countriesOnMap.unshift(['Country']);
-      }
-    }
-
-    definedPropertyAndColours()
+    countriesOnMap.unshift(['Country', '']);
 
     function drawRegionsMap() {
       var data = google.visualization.arrayToDataTable(
         countriesOnMap
       );
 
-      const definedColours = () => {
-
-        if (countriesOnMap.length < 10) {
-          return {colors: ['red', 'green', 'blue', 'yellow']}
-        } else {
-          return {colors: ['#000000']}
-        }
-      };
-
-
-      const coloursToBeUsed = definedColours()
+      // const definedColours = () => {
+      //
+      //   if (countriesOnMap.length < 10) {
+      //     return {colors: ['red', 'green', 'blue', 'yellow']}
+      //   } else {
+      //     return {colors: ['#000000']}
+      //   }
+      // };
+      //
+      //
+      // const coloursToBeUsed = definedColours()
 
       const definedColours = () => {
         if (countriesOnMap.length < 10) {
