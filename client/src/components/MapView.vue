@@ -10,7 +10,7 @@ export default {
   name: "map-view",
   data() {
     return {
-      countries: this.countriesForMap
+      // countries: this.countriesForMap
     }
   },
   props: ['countriesForMap'],
