@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <a href="http://localhost:8080/">
       <h1 class="title">
 
         <span id="W">W</span>
@@ -13,6 +14,7 @@
         <span id="P">P</span>
         <span id="map-logo"><i class="fas fa-globe-americas"></i></span>
       </h1>
+</a>
     <div class="grid-container">
       <div class="col-1">
         <map-view class="map" v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
@@ -294,6 +296,10 @@ color: #51ff1c;
 #map-logo {
   padding-left: 20px;
   color: #57cfff;
+}
+
+#app > a {
+  text-decoration: none;
 }
 
 </style>
