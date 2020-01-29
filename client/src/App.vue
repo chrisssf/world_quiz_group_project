@@ -126,8 +126,26 @@ export default {
         const randomAnswerIndex = Math.floor(Math.random() * 4);
         this.randomAnswer = randomCountries[randomAnswerIndex]
         this.componentKey += 1
-    }
-  },
+    },
+
+  getRandomCapitals() {
+      const randomCountries = []
+      while (randomCountries.length < 4 ) {
+        const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length - 1));
+        const randomCountry = this.mapDataArray[randomIndex]
+        console.log(randomCountry.area, randomIndex, randomCountry.capital);
+        if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
+          randomCountries.push(randomCountry)
+        }
+      }
+      console.log(randomCountries);
+      this.randomCountries = randomCountries
+      this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v:index, f:""}])
+      const randomAnswerIndex = Math.floor(Math.random() * 4);
+      this.randomAnswer = randomCountries[randomAnswerIndex]
+      this.componentKey += 1
+  }
+},
 
   mounted() {
     fetch("https://restcountries.eu/rest/v2/all")
@@ -154,7 +172,7 @@ export default {
     eventBus.$on('capital-quiz-selected', () => {
       this.selectedQuiz = "capitals"
       this.questionCounter = 1
-      this.fetchCapitalData(0)
+      this.getRandomCapitals()
     })
 
     eventBus.$on('select-more-info', countryCode => {
@@ -171,7 +189,7 @@ export default {
       }
       else if
       (selectedQuiz === "capitals"){
-        this.fetchCapitalData(this.questionCounter)
+        this.getRandomCapitals()
       }
       this.questionCounter += 1;
     })
