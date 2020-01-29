@@ -111,17 +111,9 @@ export default {
     },
 
     getRandomCountries() {
-      // while (this.loaded === null) {
-      //   console.log("not loaded API data yet");
-      // }
-      // while (this.mapDataArray.length === 0) {
-      //   console.log("not loaded API data yet");
-      // }
-
         const randomCountries = []
         while (randomCountries.length < 4 ) {
           const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length - 1));
-          // if this.mapDataArray
           const randomCountry = this.mapDataArray[randomIndex]
           console.log(randomCountry.area, randomIndex, randomCountry.name);
           if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
