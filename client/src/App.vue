@@ -166,6 +166,8 @@ export default {
       this.selectedQuiz = "countries"
       this.questionCounter = 0
       this.getRandomCountries()
+
+
       // this.fetchData(0)
     })
 
@@ -173,6 +175,7 @@ export default {
       this.selectedQuiz = "capitals"
       this.questionCounter = 0
       this.getRandomCapitals()
+
     })
 
     eventBus.$on('select-more-info', countryCode => {

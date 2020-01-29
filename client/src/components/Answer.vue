@@ -47,6 +47,13 @@
         this.selectedAnswer = selectedCountry.name
 
       })
+
+      eventBus.$on('country-quiz-selected', () => {
+        this.selectedAnswer = null
+      })
+      eventBus.$on('capital-quiz-selected', () => {
+        this.selectedAnswer = null
+      })
     }
   }
 
