@@ -44,15 +44,20 @@ export default {
     // };
 
 
-
-      var options = {
-        backgroundColor: '#81d4fa',
-        colorAxis: {colors: ['green', 'darkgreen']},
-        // colorAxis: {colors: ['yellow', 'black', 'red']},
-      // colorAxis: {colors: ['red', 'green', 'blue', 'yellow']},
-      legend: 'none'
+      const definedColours = () => {
+        if (countriesOnMap.length < 10) {
+          return {colors: ['red', 'green', 'blue', 'yellow']}
+        } else {
+          return {colors: ['green', 'darkgreen']}
+        }
       };
 
+      const coloursToBeUsed = definedColours()
+      var options = {
+        backgroundColor: '#81d4fa',
+        colorAxis: coloursToBeUsed,
+        legend: 'none'
+      };
 
 
       var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));

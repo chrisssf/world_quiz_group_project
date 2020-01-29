@@ -19,9 +19,9 @@
       </div>
       <div class="col-2">
         <selection-buttons class="quiz-choices"/>
-        <questions class="questions" v-if="this.question" :question='question'/>
-        <answers class="answers" v-if="this.options" :selectedQuiz="selectedQuiz" :correctAnswer='correctAnswer' :questionCounter="questionCounter" />
-        <country-info class="map-info-box" v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
+        <questions class="questions" v-if="this.randomAnswer" :question='randomAnswer'/>
+        <answers class="answers" v-if="this.randomOptions" :selectedQuiz="selectedQuiz" :correctAnswer='randomAnswer' :randomCountries="randomCountries" :questionCounter="questionCounter" />
+        <country-info class="map-info-box" v-if='mapCountryInfo !== null && randomOptions === null' :mapCountryInfo='mapCountryInfo' />
 
       </div>
     </div>
@@ -37,6 +37,8 @@ import Answers from './components/Answer.vue'
 import {eventBus} from './main.js'
 import CountryService from './services/CountriesService.js'
 import CapitalsService from './services/CapitalsService.js'
+import apiKey from './apikey.js'
+
 
 
 export default {
@@ -50,24 +52,27 @@ export default {
   },
   data() {
     return {
-      question: null,
-      options: null,
-      correctAnswer: null,
+      // question: null,
+      // options: null,
+      // correctAnswer: null,
       mapCountryInfo: null,
       mapDataArray: [],
       allCountriesForMap: [],
       loaded: null,
       componentKey: 0,
-      countries: [],
+      // countries: [], //!!!!!!!!!!!
       questionCounter: 0,
-      selectedQuiz: null
+      selectedQuiz: null,
+      randomOptions: null,
+      randomCountries: [],
+      randomAnswer: null,
     }
   },
   computed: {
     countriesForMap: function() {
 
-      if (this.options) {
-        return this.options
+      if (this.randomOptions) {
+        return this.randomOptions
       } else {
         return this.allCountriesForMap
       }
@@ -101,6 +106,32 @@ export default {
       })
       .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
       .then(() => this.componentKey += 1)
+    },
+
+    getRandomCountries() {
+      // while (this.loaded === null) {
+      //   console.log("not loaded API data yet");
+      // }
+      // while (this.mapDataArray.length === 0) {
+      //   console.log("not loaded API data yet");
+      // }
+
+        const randomCountries = []
+        while (randomCountries.length < 4 ) {
+          const randomIndex = Math.floor(Math.random() * 251);
+          // if this.mapDataArray
+          const randomCountry = this.mapDataArray[randomIndex]
+          console.log(randomCountry.area, randomIndex, randomCountry.name);
+          if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
+            randomCountries.push(randomCountry)
+          }
+        }
+        console.log(randomCountries);
+        this.randomCountries = randomCountries
+        this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f:"?"}, {v:index, f:""}])
+        const randomAnswerIndex = Math.floor(Math.random() * 4);
+        this.randomAnswer = randomCountries[randomAnswerIndex]
+        this.componentKey += 1
     }
   },
 
@@ -110,18 +141,20 @@ export default {
     .then(countries => this.mapDataArray = countries)
     .then(() => {
       // this.mapDataArray.forEach(country => this.allCountriesForMap.push([country.alpha2Code, country.numericCode]))
-      this.mapDataArray.forEach((country, index )=> this.allCountriesForMap.push([{v: country.alpha2Code, f: country.name}, {v:index, f:""}]))
+      this.mapDataArray.forEach((country, index)=> this.allCountriesForMap.push([{v: country.alpha2Code, f: country.name}, {v:index, f:""}]))
       // this.mapDataArray.forEach(country => this.allCountriesForMap.push([country.name]))
     })
     .then(() => {
         this.loaded = true
     })
+    // .then(() => this.getRandomCountries() )
 
 
     eventBus.$on('country-quiz-selected', () => {
       this.selectedQuiz = "countries"
       this.questionCounter = 1
-      this.fetchData(0)
+      this.getRandomCountries()
+      // this.fetchData(0)
     })
 
     eventBus.$on('capital-quiz-selected', () => {
@@ -138,15 +171,20 @@ export default {
 
     eventBus.$on('next-question', (selectedQuiz) => {
       if (selectedQuiz === "countries"){
-        this.fetchData(this.questionCounter)
+        // this.fetchData(this.questionCounter)
+        // this.loaded = null
+        this.getRandomCountries()
       }
       else if
       (selectedQuiz === "capitals"){
         this.fetchCapitalData(this.questionCounter)
       }
       this.questionCounter += 1;
-
     })
+
+    // function () {
+      // this.getRandomCountries()
+    // }
   }
 }
 

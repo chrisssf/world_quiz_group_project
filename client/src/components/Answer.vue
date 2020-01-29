@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="answer-container" v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
-    <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer' class="far fa-thumbs-down fa-2x"></i></p>
+    <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer.name' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer.name' class="far fa-thumbs-down fa-2x"></i></p>
     <button v-if="questionCounter < 9" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
     <div v-if="questionCounter === 9"> <p>Well done on completing the quiz!</p>
       <a href="http://localhost:8080" class="btn next">Return home</a></div>
@@ -19,10 +19,10 @@
         selectedAnswer: null
       }
     },
-    props: ['correctAnswer', 'selectedQuiz', 'questionCounter'],
+    props: ['correctAnswer', 'selectedQuiz', 'questionCounter', 'randomCountries'],
     methods: {
       checkAnswer() {
-        if (this.selectedAnswer === this.correctAnswer) {
+        if (this.selectedAnswer === this.correctAnswer.name) {
           return "Correct!"
         } else {
           return "Try again"
@@ -35,7 +35,8 @@
     },
     mounted() {
       eventBus.$on('select-more-info', (selectedAnswer) => {
-        this.selectedAnswer = selectedAnswer
+        const selectedCountry = this.randomCountries.find(country => country.alpha2Code === selectedAnswer)
+        this.selectedAnswer = selectedCountry.name
       })
       eventBus.$on('country-quiz-selected', () => {
         this.selectedAnswer = null
