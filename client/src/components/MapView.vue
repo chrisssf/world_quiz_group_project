@@ -23,26 +23,37 @@ export default {
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     const countriesOnMap = this.countriesForMap
-    countriesOnMap.unshift(['Country', '']);
+
+
+    const definedPropertyAndColours = () =>{
+      if (countriesOnMap.length < 5) {
+        console.log('yes');
+        countriesOnMap.unshift(['Country', '']);
+
+      } else {
+        console.log('nae');
+        countriesOnMap.unshift(['Country']);
+      }
+    }
+
+    definedPropertyAndColours()
 
     function drawRegionsMap() {
       var data = google.visualization.arrayToDataTable(
         countriesOnMap
       );
 
+      const definedColours = () => {
 
-    //   const definedColours = () => {
-    //     console.log("maybe");
-    //   if (countriesOnMap.length < 10) {
-    //     console.log("YAYYYYY", countriesOnMap.length)
-    //     return {colors: ['#283947']}
-    //     // return   {colors: ['red', 'green', 'blue', 'yellow'], values: [0, 1, 2, 3]}
-    //   } else {
-    //     console.log("BOOOOOO", countriesOnMap.length)
-    //     return {colors: ['#000000']}
-    //   }
-    // };
+        if (countriesOnMap.length < 10) {
+          return {colors: ['red', 'green', 'blue', 'yellow']}
+        } else {
+          return {colors: ['#000000']}
+        }
+      };
 
+
+      const coloursToBeUsed = definedColours()
 
       const definedColours = () => {
         if (countriesOnMap.length < 10) {
