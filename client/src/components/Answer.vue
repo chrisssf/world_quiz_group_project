@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="answer-container" v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
-    <p> {{ checkAnswer() }} <i v-if='this.selectedAnswer === this.correctAnswer.name' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer.name' class="far fa-thumbs-down fa-2x"></i></p>
+    <p><i v-if='this.selectedAnswer === this.correctAnswer.name' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer.name' class="far fa-thumbs-down fa-2x"></i></p>
     <button v-if="questionCounter < 9" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
-    <div v-if="questionCounter === 9"> <p>Well done on completing the quiz!</p>
+    <div v-if="questionCounter === 9"> <p>Well done on completing the quiz! Your score is {{this.quizScore}}</p>
       <a href="http://localhost:8080" class="btn next">Return home</a></div>
     </div>
   </template>
@@ -16,16 +16,24 @@
     name: 'answer',
     data(){
       return{
-        selectedAnswer: null
+        selectedAnswer: null,
+        quizScore: 0,
+      }
+    },
+    watch: {
+      selectedAnswer() {
+        this.checkAnswer()
       }
     },
     props: ['correctAnswer', 'selectedQuiz', 'questionCounter', 'randomCountries'],
     methods: {
       checkAnswer() {
         if (this.selectedAnswer === this.correctAnswer.name) {
+          console.log(this.quizScore);
+          this.quizScore += 1
           return "Correct!"
         } else {
-          return "Try again"
+          return "Incorrect"
         }
       },
       handleNextQuestion(){
@@ -37,12 +45,7 @@
       eventBus.$on('select-more-info', (selectedAnswer) => {
         const selectedCountry = this.randomCountries.find(country => country.alpha2Code === selectedAnswer)
         this.selectedAnswer = selectedCountry.name
-      })
-      eventBus.$on('country-quiz-selected', () => {
-        this.selectedAnswer = null
-      })
-      eventBus.$on('capital-quiz-selected', () => {
-        this.selectedAnswer = null
+
       })
     }
   }

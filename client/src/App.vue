@@ -14,7 +14,7 @@
         <span id="P">P</span>
         <span id="map-logo"><i class="fas fa-globe-americas"></i></span>
       </h1>
-</a>
+    </a>
     <div class="grid-container">
       <div class="col-1">
         <map-view class="map" v-if="this.loaded" :countriesForMap='countriesForMap' :key="componentKey"/>
@@ -81,34 +81,34 @@ export default {
     }
   },
   methods: {
-    fetchData(questionNumber) {
-      CountryService.getCountries()
-      // .then(countries => countries)
-      .then((countries) => {
-        this.options = countries[questionNumber].Options
-        return countries
-      })
-      .then((countries) => {
-        this.question = countries[questionNumber].Question
-        return countries
-      })
-      .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
-      .then(() => this.componentKey += 1)
-    },
-
-    fetchCapitalData(questionNumber) {
-      CapitalsService.getCapitals()
-      .then((capitals) => {
-        this.options = capitals[questionNumber].Options
-        return capitals
-      })
-      .then((capitals) => {
-        this.question = capitals[questionNumber].Question
-        return capitals
-      })
-      .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
-      .then(() => this.componentKey += 1)
-    },
+    // fetchData(questionNumber) {
+    //   CountryService.getCountries()
+    //   // .then(countries => countries)
+    //   .then((countries) => {
+    //     this.options = countries[questionNumber].Options
+    //     return countries
+    //   })
+    //   .then((countries) => {
+    //     this.question = countries[questionNumber].Question
+    //     return countries
+    //   })
+    //   .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
+    //   .then(() => this.componentKey += 1)
+    // },
+    //
+    // fetchCapitalData(questionNumber) {
+    //   CapitalsService.getCapitals()
+    //   .then((capitals) => {
+    //     this.options = capitals[questionNumber].Options
+    //     return capitals
+    //   })
+    //   .then((capitals) => {
+    //     this.question = capitals[questionNumber].Question
+    //     return capitals
+    //   })
+    //   .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
+    //   .then(() => this.componentKey += 1)
+    // },
 
     getRandomCountries() {
         const randomCountries = []
@@ -164,14 +164,14 @@ export default {
 
     eventBus.$on('country-quiz-selected', () => {
       this.selectedQuiz = "countries"
-      this.questionCounter = 1
+      this.questionCounter = 0
       this.getRandomCountries()
       // this.fetchData(0)
     })
 
     eventBus.$on('capital-quiz-selected', () => {
       this.selectedQuiz = "capitals"
-      this.questionCounter = 1
+      this.questionCounter = 0
       this.getRandomCapitals()
     })
 
