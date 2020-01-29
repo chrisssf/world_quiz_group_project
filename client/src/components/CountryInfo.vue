@@ -31,6 +31,13 @@ export default {
   background-color: white;
 }
 
+@media screen and (max-width: 1050px) {
+  .info-container {
+    width: 30%;
+    margin-bottom: 2em;
+  }
+}
+
 ul{
   list-style: none;
 
