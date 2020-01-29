@@ -33,7 +33,7 @@ export default {
 
 <style lang="css" scoped>
 .button-choices p {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .btn {

@@ -45,6 +45,7 @@ ul{
 
 .small-flag {
   height: 30px;
+  border: solid black 2px;
 }
 
 #country-title {
