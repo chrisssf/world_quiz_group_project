@@ -3,6 +3,7 @@
   <div class="question-container">
     <h2 v-if="this.selectedQuiz === 'countries'">Which country on the map is {{question.name}}?</h2>
     <h2 v-if="this.selectedQuiz === 'capitals'">Which country's capital is {{question.capital}}?</h2>
+    <h2 v-if="this.selectedQuiz === 'flags'">Which country's flag is <br> <img class="small-flag" :src="question.flag" alt="NoneApplicable"> </h2>
     <h2>Click the country you think it is</h2>
   </div>
 
@@ -35,6 +36,11 @@ export default {
 <style lang="css" scoped>
 h2 {
   font-size: 2em;
+}
+
+.small-flag {
+  height: 70px;
+  border: solid black 2px;
 }
 
 </style>

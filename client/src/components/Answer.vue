@@ -6,7 +6,7 @@
     <div v-if="questionCounter === 9"> <p>Well done on completing the quiz! Your score is {{this.quizScore}}</p>
       <a href="http://localhost:8080" class="btn next">Return home</a></div>
     </div>
-  </template>
+</template>
 
   <script>
   import { eventBus } from '../main.js'

@@ -5,6 +5,7 @@
     <p id="underline">Choose a quiz below:</p>
     <button class="btn success" type="button" @click="handleCountryClick" name="country-select-button">Countries</button>
     <button class="btn danger" type="button" @click="handleCapitalClick" name="capital-select-button">Capitals</button>
+    <button class="btn orange" type="button" @click="handleFlagClick" name="flag-select-button">Flags</button>
   </div>
 </template>
 
@@ -25,6 +26,10 @@ export default {
     },
     handleCapitalClick() {
       eventBus.$emit('capital-quiz-selected')
+      this.quizCurrentlySelected = false
+    },
+    handleFlagClick() {
+      eventBus.$emit('flag-quiz-selected')
       this.quizCurrentlySelected = false
     }
   }
@@ -62,11 +67,21 @@ export default {
 .danger {
   border-color: #f44336;
   color: red;
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .danger:hover {
   background: #f44336;
+  color: white;
+}
+
+.orange{
+  border-color: orange;
+  color: orange;
+}
+
+.orange:hover {
+  background: orange;
   color: white;
 }
 

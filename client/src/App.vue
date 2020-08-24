@@ -129,21 +129,37 @@ export default {
     },
 
   getRandomCapitals() {
-      const randomCountries = []
-      while (randomCountries.length < 4 ) {
-        const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length - 1));
-        const randomCountry = this.mapDataArray[randomIndex]
-        console.log(randomCountry.area, randomIndex, randomCountry.capital);
-        if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
-          randomCountries.push(randomCountry)
-        }
+    const randomCountries = []
+    while (randomCountries.length < 4 ) {
+      const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length - 1));
+      const randomCountry = this.mapDataArray[randomIndex]
+      console.log(randomCountry.area, randomIndex, randomCountry.capital);
+      if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
+        randomCountries.push(randomCountry)
       }
-      console.log(randomCountries);
-      this.randomCountries = randomCountries
-      this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v:index, f:""}])
-      const randomAnswerIndex = Math.floor(Math.random() * 4);
-      this.randomAnswer = randomCountries[randomAnswerIndex]
-      this.componentKey += 1
+    }
+    console.log(randomCountries);
+    this.randomCountries = randomCountries
+    this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v:index, f:""}])
+    const randomAnswerIndex = Math.floor(Math.random() * 4);
+    this.randomAnswer = randomCountries[randomAnswerIndex]
+    this.componentKey += 1
+  },
+
+  getRandomFlags() {
+    const randomCountries = []
+    while (randomCountries.length < 4){
+      const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length - 1));
+      const randomCountry = this.mapDataArray[randomIndex]
+      if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
+        randomCountries.push(randomCountry)
+      }
+    }
+    this.randomCountries = randomCountries
+    this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v: index, f: ""}])
+    const randomAnswerIndex = Math.floor(Math.random() * 4)
+    this.randomAnswer = randomCountries[randomAnswerIndex]
+    this.componentKey += 1
   }
 },
 
@@ -178,11 +194,18 @@ export default {
 
     })
 
+    eventBus.$on('flag-quiz-selected', () =>{
+      this.selectedQuiz = "flags"
+      this.questionCounter = 0
+      this.getRandomFlags()
+    })
+
     eventBus.$on('select-more-info', countryCode => {
       fetch("https://restcountries.eu/rest/v2/all")
       .then(res => res.json())
       .then(countries => this.mapCountryInfo = countries.find(country => country.alpha2Code === countryCode))
     })
+
 
     eventBus.$on('next-question', (selectedQuiz) => {
       if (selectedQuiz === "countries"){
@@ -190,9 +213,11 @@ export default {
         // this.loaded = null
         this.getRandomCountries()
       }
-      else if
-      (selectedQuiz === "capitals"){
+      else if (selectedQuiz === "capitals"){
         this.getRandomCapitals()
+      }
+      else if (selectedQuiz === "flags"){
+        this.getRandomFlags()
       }
       this.questionCounter += 1;
     })
