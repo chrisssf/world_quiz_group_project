@@ -1,11 +1,19 @@
 <template lang="html">
-  <div class="button-choices">
+  <div class="button-choices" :key="key">
     <p v-if="quizCurrentlySelected">Click a country on the map to find out some more information!</p>
     <p>Up for a challenge?</p>
     <p id="underline">Choose a quiz below:</p>
     <button class="btn success" type="button" @click="handleCountryClick" name="country-select-button">Countries</button>
     <button class="btn danger" type="button" @click="handleCapitalClick" name="capital-select-button">Capitals</button>
     <button class="btn orange" type="button" @click="handleFlagClick" name="flag-select-button">Flags</button>
+
+    <button class="btn sucess" type="button" @click="handleEasyCountryClick" v-if='this.clickedQuiz === "country"' name="easy-country-button">Easy</button>
+    <button class="btn sucess" type="button" @click="handleHardCountryClick" v-if='this.clickedQuiz === "country"' name="hard-country-button">Hard</button>
+
+    <button class="btn danger" type="button" @click="handleEasyCapitalClick" v-if='this.clickedQuiz === "capital"' name="easy-capital-button">Easy</button>
+    <button class="btn danger" type="button" @click="handleHardCapitalClick" v-if='this.clickedQuiz === "capital"' name="hard-capital-button">Hard</button>
+
+  
   </div>
 </template>
 
@@ -16,22 +24,38 @@ export default {
   name: 'select-buttons',
   data() {
     return {
-      quizCurrentlySelected: true
+      quizCurrentlySelected: true,
+      key: 0,
+      clickedQuiz: null
     }
   },
   methods: {
-    handleCountryClick() {
-      eventBus.$emit('country-quiz-selected')
+    handleCountryClick(){
+      this.clickedQuiz = "country"
+      this.key += 1
+    },
+
+    handleCapitalClick(){
+      this.clickedQuiz = "capital"
+      this.key += 1
+    },
+
+    handleHardCountryClick() {
+      this.clickedQuiz = null
+      this.key += 1
+      eventBus.$emit('hard-country-quiz-selected')
       this.quizCurrentlySelected = false
     },
-    handleCapitalClick() {
-      eventBus.$emit('capital-quiz-selected')
+    handleHardCapitalClick() {
+      this.clickedQuiz = null
+      this.key += 1
+      eventBus.$emit('hard-capital-quiz-selected')
       this.quizCurrentlySelected = false
     },
-    handleFlagClick() {
-      eventBus.$emit('flag-quiz-selected')
-      this.quizCurrentlySelected = false
-    }
+    // handleFlagClick() {
+    //   eventBus.$emit('flag-quiz-selected')
+    //   this.quizCurrentlySelected = false
+    // }
   }
 }
 </script>

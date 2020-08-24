@@ -178,7 +178,7 @@ export default {
     // .then(() => this.getRandomCountries() )
 
 
-    eventBus.$on('country-quiz-selected', () => {
+    eventBus.$on('hard-country-quiz-selected', () => {
       this.selectedQuiz = "countries"
       this.questionCounter = 0
       this.getRandomCountries()
@@ -187,7 +187,7 @@ export default {
       // this.fetchData(0)
     })
 
-    eventBus.$on('capital-quiz-selected', () => {
+    eventBus.$on('hard-capital-quiz-selected', () => {
       this.selectedQuiz = "capitals"
       this.questionCounter = 0
       this.getRandomCapitals()
