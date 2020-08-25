@@ -67,8 +67,9 @@ export default {
       eventBus.$emit('hard-capital-quiz-selected')
       this.quizCurrentlySelected = false
     },
-    
+
     handleFlagClick() {
+      this.clickedQuiz = null
       eventBus.$emit('flag-quiz-selected')
       this.quizCurrentlySelected = false
     }
