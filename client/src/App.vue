@@ -21,9 +21,9 @@
       </div>
       <div class="col-2">
         <selection-buttons class="quiz-choices"/>
-        <questions class="questions" v-if="this.randomAnswer" :selectedQuiz='selectedQuiz' :question='randomAnswer'/>
-        <answers class="answers" v-if="this.randomOptions" :selectedQuiz="selectedQuiz" :correctAnswer='randomAnswer' :randomCountries="randomCountries" :questionCounter="questionCounter" />
-        <country-info class="map-info-box" v-if='mapCountryInfo !== null && randomOptions === null' :mapCountryInfo='mapCountryInfo' />
+        <questions class="questions" v-if="this.correctAnswer" :selectedQuiz='selectedQuiz' :question='correctAnswer' :easyQuestion='question' />
+        <answers class="answers" v-if="this.options" :selectedQuiz='selectedQuiz' :correctAnswer='correctAnswer' :randomCountries='randomCountries' :questionCounter='questionCounter' :easyOptions='options' :easyAnswer='answer' />
+        <country-info class="map-info-box" v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
 
       </div>
     </div>
@@ -54,9 +54,10 @@ export default {
   },
   data() {
     return {
-      // question: null,
-      // options: null,
-      // correctAnswer: null,
+      question: null,
+      options: null,
+      correctAnswer: null,
+
       mapCountryInfo: null,
       mapDataArray: [],
       allCountriesForMap: [],
@@ -65,50 +66,57 @@ export default {
       // countries: [], //!!!!!!!!!!!
       questionCounter: 0,
       selectedQuiz: null,
-      randomOptions: null,
+      // randomOptions: null,
       randomCountries: [],
-      randomAnswer: null,
+      // randomAnswer: null,
     }
   },
   computed: {
     countriesForMap: function() {
 
-      if (this.randomOptions) {
-        return this.randomOptions
+      if (this.options) {
+        return this.options
       } else {
         return this.allCountriesForMap
       }
     }
   },
   methods: {
-    // fetchData(questionNumber) {
-    //   CountryService.getCountries()
-    //   // .then(countries => countries)
-    //   .then((countries) => {
-    //     this.options = countries[questionNumber].Options
-    //     return countries
-    //   })
-    //   .then((countries) => {
-    //     this.question = countries[questionNumber].Question
-    //     return countries
-    //   })
-    //   .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
-    //   .then(() => this.componentKey += 1)
-    // },
-    //
-    // fetchCapitalData(questionNumber) {
-    //   CapitalsService.getCapitals()
-    //   .then((capitals) => {
-    //     this.options = capitals[questionNumber].Options
-    //     return capitals
-    //   })
-    //   .then((capitals) => {
-    //     this.question = capitals[questionNumber].Question
-    //     return capitals
-    //   })
-    //   .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
-    //   .then(() => this.componentKey += 1)
-    // },
+    fetchCountryData(questionNumber) {
+      CountryService.getCountries()
+      // .then(countries => countries)
+      .then((countries) => {
+        // this.options = countries[questionNumber].Options
+        this.options = countries[questionNumber].Options
+
+        console.log("options", this.options)
+        return countries
+      })
+      .then((countries) => {
+        // this.question = countries[questionNumber].Question
+        this.correctAnswer = "something"
+        this.question = countries[questionNumber].Question
+
+        console.log("question", this.question)
+        return countries
+      })
+      .then((countries) => this.correctAnswer = countries[questionNumber].Answer)
+      .then(() => this.componentKey += 1)
+    },
+    
+    fetchCapitalData(questionNumber) {
+      CapitalsService.getCapitals()
+      .then((capitals) => {
+        this.options = capitals[questionNumber].Options
+        return capitals
+      })
+      .then((capitals) => {
+        this.question = capitals[questionNumber].Question
+        return capitals
+      })
+      .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
+      .then(() => this.componentKey += 1)
+    },
 
     getRandomCountries() {
         const randomCountries = []
@@ -122,9 +130,9 @@ export default {
         }
         console.log(randomCountries);
         this.randomCountries = randomCountries
-        this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f:"?"}, {v:index, f:""}])
+        this.options = randomCountries.map((country, index) => [{v: country.alpha2Code, f:"?"}, {v:index, f:""}])
         const randomAnswerIndex = Math.floor(Math.random() * 4);
-        this.randomAnswer = randomCountries[randomAnswerIndex]
+        this.correctAnswer = randomCountries[randomAnswerIndex]
         this.componentKey += 1
     },
 
@@ -140,9 +148,9 @@ export default {
     }
     console.log(randomCountries);
     this.randomCountries = randomCountries
-    this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v:index, f:""}])
+    this.options = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v:index, f:""}])
     const randomAnswerIndex = Math.floor(Math.random() * 4);
-    this.randomAnswer = randomCountries[randomAnswerIndex]
+    this.correctAnswer = randomCountries[randomAnswerIndex]
     this.componentKey += 1
   },
 
@@ -156,9 +164,9 @@ export default {
       }
     }
     this.randomCountries = randomCountries
-    this.randomOptions = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v: index, f: ""}])
+    this.options = randomCountries.map((country, index) => [{v: country.alpha2Code, f: country.name}, {v: index, f: ""}])
     const randomAnswerIndex = Math.floor(Math.random() * 4)
-    this.randomAnswer = randomCountries[randomAnswerIndex]
+    this.correctAnswer = randomCountries[randomAnswerIndex]
     this.componentKey += 1
   }
 },
@@ -179,16 +187,22 @@ export default {
 
 
     eventBus.$on('hard-country-quiz-selected', () => {
-      this.selectedQuiz = "countries"
+      this.selectedQuiz = "hardCountries"
       this.questionCounter = 0
       this.getRandomCountries()
 
 
-      // this.fetchData(0)
+      // this.fetchCountryData(0)
+    })
+
+    eventBus.$on('easy-country-quiz-selected', () =>{
+      this.selectedQuiz = "easyCountries"
+      this.questionCounter = 1
+      this.fetchCountryData(0)
     })
 
     eventBus.$on('hard-capital-quiz-selected', () => {
-      this.selectedQuiz = "capitals"
+      this.selectedQuiz = "hardCapitals"
       this.questionCounter = 0
       this.getRandomCapitals()
 
@@ -208,16 +222,20 @@ export default {
 
 
     eventBus.$on('next-question', (selectedQuiz) => {
-      if (selectedQuiz === "countries"){
-        // this.fetchData(this.questionCounter)
+      if (selectedQuiz === "hardCountries"){
+        // this.fetchCountryData(this.questionCounter)
         // this.loaded = null
         this.getRandomCountries()
       }
-      else if (selectedQuiz === "capitals"){
+      else if (selectedQuiz === "hardCapitals"){
         this.getRandomCapitals()
       }
       else if (selectedQuiz === "flags"){
         this.getRandomFlags()
+      }
+      else if (selectedQuiz === "easyCountries"){
+        this.fetchCountryData(this.questionCounter)
+        // this.loaded = null
       }
       this.questionCounter += 1;
     })

@@ -1,8 +1,9 @@
 <template lang="html">
   <!-- <h2>Which of these countries is Germany?</h2> -->
   <div class="question-container">
-    <h2 v-if="this.selectedQuiz === 'countries'">Which country on the map is {{question.name}}?</h2>
-    <h2 v-if="this.selectedQuiz === 'capitals'">Which country's capital is {{question.capital}}?</h2>
+    <h2 v-if="this.selectedQuiz === 'easyCountries'"> {{this.easyQuestion}} </h2>
+    <h2 v-if="this.selectedQuiz === 'hardCountries'">Which country on the map is {{question.name}}?</h2>
+    <h2 v-if="this.selectedQuiz === 'hardCapitals'">Which country's capital is {{question.capital}}?</h2>
     <h2 v-if="this.selectedQuiz === 'flags'">Which country's flag is <br> <img class="small-flag" :src="question.flag" alt="NoneApplicable"> </h2>
     <h2>Click the country you think it is</h2>
   </div>
@@ -18,8 +19,8 @@ export default {
       quizType: null
     }
   },
-  props: ['question', 'selectedQuiz']
-  // mounted() {
+  props: ['question', 'selectedQuiz', 'easyQuestion'],
+  mounted() {
   //   eventBus.$on('country-quiz-selected', () => {
   //     this.quizType = "country"
   //   })
@@ -28,7 +29,9 @@ export default {
   //     this.quizType = "capital"
   //   })
   //
-  // }
+
+  this.console.log("easyQuestion")
+  }
 }
 
 </script>

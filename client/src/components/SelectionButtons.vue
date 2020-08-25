@@ -40,6 +40,13 @@ export default {
       this.key += 1
     },
 
+    handleEasyCountryClick(){
+      this.clickedQuiz = null
+      this.key += 1
+      eventBus.$emit('easy-country-quiz-selected')
+      this.quizCurrentlySelected = false
+    },
+
     handleHardCountryClick() {
       this.clickedQuiz = null
       this.key += 1

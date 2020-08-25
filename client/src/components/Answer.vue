@@ -1,11 +1,19 @@
 <template lang="html">
   <div class="answer-container" v-if="selectedAnswer">
     <p>You selected {{ selectedAnswer }}</p>
-    <p><i v-if='this.selectedAnswer === this.correctAnswer.name' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer.name' class="far fa-thumbs-down fa-2x"></i></p>
-    <button v-if="questionCounter < 9" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
-    <div v-if="questionCounter === 9"> <p>Well done on completing the quiz! Your score is {{this.quizScore}}</p>
-      <a href="http://localhost:8080" class="btn next">Return home</a></div>
+    <p v-if='this.selectedQuiz.slice(0, 1) === "h"'><i v-if='this.selectedAnswer === this.correctAnswer.name' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer.name' class="far fa-thumbs-down fa-2x"></i></p>
+    <p v-if='this.selectedQuiz.slice(0, 1) === "e"'><i v-if='this.selectedAnswer === this.correctAnswer' class="far fa-thumbs-up fa-2x"></i><i v-if='this.selectedAnswer !== this.correctAnswer' class="far fa-thumbs-down fa-2x"></i></p>
+    
+    <div v-if='this.selectedQuiz.slice(0, 1) === "h"'><button v-if="questionCounter < 9" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
+      <div v-if="questionCounter === 9"> <p>Well done on completing the quiz! Your score is {{this.quizScore}}</p>
+        <a href="http://localhost:8080" class="btn next">Return home</a></div>
     </div>
+    
+    <div v-if='this.selectedQuiz.slice(0, 1) === "e"'><button v-if="questionCounter < 10" class="btn next" @click="handleNextQuestion" type="button" name="next-question">Next</button>
+      <div v-if="questionCounter === 10"> <p>Well done on completing the quiz! Your score is {{this.quizScore}}</p>
+        <a href="http://localhost:8080" class="btn next">Return home</a></div>
+    </div>
+  </div>
 </template>
 
   <script>
@@ -43,9 +51,17 @@
     },
     mounted() {
       eventBus.$on('select-more-info', (selectedAnswer) => {
-        const selectedCountry = this.randomCountries.find(country => country.alpha2Code === selectedAnswer)
-        this.selectedAnswer = selectedCountry.name
+        console.log("selected answer", selectedAnswer)
+        console.log("selected quiz", this.selectedQuiz.slice(0, 1))
 
+        if ( this.selectedQuiz.slice(0, 1) === 'h') {
+          const selectedCountry = this.randomCountries.find(country => country.alpha2Code === selectedAnswer)
+          this.selectedAnswer = selectedCountry.name
+        }
+        else {
+          this.selectedAnswer = selectedAnswer
+          // console.log("hi")
+        }
       })
 
       eventBus.$on('country-quiz-selected', () => {
