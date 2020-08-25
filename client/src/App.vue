@@ -86,15 +86,12 @@ export default {
       CountryService.getCountries()
       // .then(countries => countries)
       .then((countries) => {
-        // this.options = countries[questionNumber].Options
         this.options = countries[questionNumber].Options
 
         console.log("options", this.options)
         return countries
       })
       .then((countries) => {
-        // this.question = countries[questionNumber].Question
-        this.correctAnswer = "something"
         this.question = countries[questionNumber].Question
 
         console.log("question", this.question)
@@ -208,6 +205,13 @@ export default {
 
     })
 
+    eventBus.$on('easy-capital-quiz-selected', () => {
+      this.selectedQuiz = "easyCapitals"
+      this.questionCounter = 1
+      this.fetchCapitalData(0)
+
+    })
+
     eventBus.$on('flag-quiz-selected', () =>{
       this.selectedQuiz = "flags"
       this.questionCounter = 0
@@ -236,6 +240,9 @@ export default {
       else if (selectedQuiz === "easyCountries"){
         this.fetchCountryData(this.questionCounter)
         // this.loaded = null
+      }
+      else if (selectedQuiz === "easyCapitals"){
+        this.fetchCapitalData(this.questionCounter)
       }
       this.questionCounter += 1;
     })

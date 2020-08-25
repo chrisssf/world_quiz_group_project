@@ -3,6 +3,7 @@
   <div class="question-container">
     <h2 v-if="this.selectedQuiz === 'easyCountries'"> {{this.easyQuestion}} </h2>
     <h2 v-if="this.selectedQuiz === 'hardCountries'">Which country on the map is {{question.name}}?</h2>
+    <h2 v-if="this.selectedQuiz === 'easyCapitals'"> {{this.easyQuestion}} </h2>
     <h2 v-if="this.selectedQuiz === 'hardCapitals'">Which country's capital is {{question.capital}}?</h2>
     <h2 v-if="this.selectedQuiz === 'flags'">Which country's flag is <br> <img class="small-flag" :src="question.flag" alt="NoneApplicable"> </h2>
     <h2>Click the country you think it is</h2>

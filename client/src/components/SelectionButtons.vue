@@ -53,6 +53,14 @@ export default {
       eventBus.$emit('hard-country-quiz-selected')
       this.quizCurrentlySelected = false
     },
+
+    handleEasyCapitalClick(){
+      this.clickedQuiz = null
+      this.key += 1
+      eventBus.$emit('easy-capital-quiz-selected')
+      this.quizCurrentlySelected = false
+    },
+
     handleHardCapitalClick() {
       this.clickedQuiz = null
       this.key += 1

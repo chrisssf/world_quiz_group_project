@@ -36,12 +36,22 @@
     props: ['correctAnswer', 'selectedQuiz', 'questionCounter', 'randomCountries'],
     methods: {
       checkAnswer() {
-        if (this.selectedAnswer === this.correctAnswer.name) {
-          console.log(this.quizScore);
-          this.quizScore += 1
-          return "Correct!"
+        if ( this.selectedQuiz.slice(0, 1) === 'h') {
+          if (this.selectedAnswer === this.correctAnswer.name) {
+            console.log(this.quizScore);
+            this.quizScore += 1
+            return "Correct!"
+          } else {
+            return "Incorrect"
+          }
         } else {
-          return "Incorrect"
+          if (this.selectedAnswer === this.correctAnswer) {
+            console.log(this.quizScore);
+            this.quizScore += 1
+            return "Correct!"
+          } else {
+            return "Incorrect"
+          }
         }
       },
       handleNextQuestion(){
