@@ -24,7 +24,6 @@
         <questions class="questions" v-if="this.correctAnswer" :selectedQuiz='selectedQuiz' :question='correctAnswer' :easyQuestion='question' />
         <answers class="answers" v-if="this.options" :selectedQuiz='selectedQuiz' :correctAnswer='correctAnswer' :randomCountries='randomCountries' :questionCounter='questionCounter' :easyOptions='options' :easyAnswer='answer' />
         <country-info class="map-info-box" v-if='mapCountryInfo !== null && options === null' :mapCountryInfo='mapCountryInfo' />
-
       </div>
     </div>
   </div>
@@ -184,6 +183,7 @@ export default {
 
 
     eventBus.$on('hard-country-quiz-selected', () => {
+      this.correctAnswer = null
       this.selectedQuiz = "hardCountries"
       this.questionCounter = 0
       this.getRandomCountries()
@@ -193,12 +193,14 @@ export default {
     })
 
     eventBus.$on('easy-country-quiz-selected', () =>{
+      this.correctAnswer = null
       this.selectedQuiz = "easyCountries"
       this.questionCounter = 1
       this.fetchCountryData(0)
     })
 
     eventBus.$on('hard-capital-quiz-selected', () => {
+      this.correctAnswer = null
       this.selectedQuiz = "hardCapitals"
       this.questionCounter = 0
       this.getRandomCapitals()
@@ -206,6 +208,7 @@ export default {
     })
 
     eventBus.$on('easy-capital-quiz-selected', () => {
+      this.correctAnswer = null
       this.selectedQuiz = "easyCapitals"
       this.questionCounter = 1
       this.fetchCapitalData(0)
@@ -213,6 +216,8 @@ export default {
     })
 
     eventBus.$on('flag-quiz-selected', () =>{
+      this.correctAnswer = null
+      this.options = null
       this.selectedQuiz = "flags"
       this.questionCounter = 0
       this.getRandomFlags()
@@ -302,10 +307,10 @@ body {
   bottom: 70px;
 } */
 
-.quiz-choices {
-  /* display: inline; */
-  /* width: 40%; */
-}
+/* .quiz-choices {
+  display: inline; */
+  /* width: 40%;
+} */
 
 .title {
   text-align: center;

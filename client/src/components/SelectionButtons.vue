@@ -6,12 +6,12 @@
     <button class="btn success" type="button" @click="handleCountryClick" name="country-select-button">Countries</button>
     <button class="btn danger" type="button" @click="handleCapitalClick" name="capital-select-button">Capitals</button>
     <button class="btn orange" type="button" @click="handleFlagClick" name="flag-select-button">Flags</button>
+    <br>
+    <button class="btn success difficulty-button" type="button" @click="handleEasyCountryClick" v-if='this.clickedQuiz === "country"' name="easy-country-button">Easy</button>
+    <button class="btn success difficulty-button" type="button" @click="handleHardCountryClick" v-if='this.clickedQuiz === "country"' name="hard-country-button">Hard</button>
 
-    <button class="btn sucess" type="button" @click="handleEasyCountryClick" v-if='this.clickedQuiz === "country"' name="easy-country-button">Easy</button>
-    <button class="btn sucess" type="button" @click="handleHardCountryClick" v-if='this.clickedQuiz === "country"' name="hard-country-button">Hard</button>
-
-    <button class="btn danger" type="button" @click="handleEasyCapitalClick" v-if='this.clickedQuiz === "capital"' name="easy-capital-button">Easy</button>
-    <button class="btn danger" type="button" @click="handleHardCapitalClick" v-if='this.clickedQuiz === "capital"' name="hard-capital-button">Hard</button>
+    <button class="btn danger difficulty-button" type="button" @click="handleEasyCapitalClick" v-if='this.clickedQuiz === "capital"' name="easy-capital-button">Easy</button>
+    <button class="btn danger difficulty-button" type="button" @click="handleHardCapitalClick" v-if='this.clickedQuiz === "capital"' name="hard-capital-button">Hard</button>
 
   
   </div>
@@ -67,10 +67,11 @@ export default {
       eventBus.$emit('hard-capital-quiz-selected')
       this.quizCurrentlySelected = false
     },
-    // handleFlagClick() {
-    //   eventBus.$emit('flag-quiz-selected')
-    //   this.quizCurrentlySelected = false
-    // }
+    
+    handleFlagClick() {
+      eventBus.$emit('flag-quiz-selected')
+      this.quizCurrentlySelected = false
+    }
   }
 }
 </script>
@@ -122,6 +123,10 @@ export default {
 .orange:hover {
   background: orange;
   color: white;
+}
+
+.difficulty-button {
+  margin-top: 10px;
 }
 
 #underline{

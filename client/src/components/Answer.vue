@@ -44,7 +44,7 @@
           } else {
             return "Incorrect"
           }
-        } else {
+        } else if ( this.selectedQuiz.slice(0, 1) === 'e'){
           if (this.selectedAnswer === this.correctAnswer) {
             console.log(this.quizScore);
             this.quizScore += 1
@@ -74,10 +74,16 @@
         }
       })
 
-      eventBus.$on('country-quiz-selected', () => {
+      eventBus.$on('easy-country-quiz-selected', () => {
         this.selectedAnswer = null
       })
-      eventBus.$on('capital-quiz-selected', () => {
+      eventBus.$on('hard-country-quiz-selected', () => {
+        this.selectedAnswer = null
+      })
+      eventBus.$on('easy-capital-quiz-selected', () => {
+        this.selectedAnswer = null
+      })
+      eventBus.$on('hard-capital-quiz-selected', () => {
         this.selectedAnswer = null
       })
     }
@@ -114,9 +120,9 @@ p{
   color: white;
 }
 
-.answer-container a {
-  /* margin-top: 50px; */
-}
+/* .answer-container a {
+  margin-top: 50px;
+} */
 
 
 </style>
