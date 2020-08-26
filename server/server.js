@@ -15,9 +15,11 @@ MongoClient.connect('mongodb://localhost:27017')
     const db = client.db('quiz_questions');
     const countriesCollection = db.collection('countries');
     const capitalsCollection = db.collection('capitals');
+    const flagsCollection = db.collection('flags'); //!!!!!!!!!!
 
   app.use( '/api/countries', createRouter( countriesCollection ));
   app.use( '/api/capitals', createRouter( capitalsCollection ));
+  app.use( '/api/flags', createRouter( flagsCollection ));//!!!!!!!!!!
 })
 .catch( console.error );
 
