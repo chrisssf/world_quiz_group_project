@@ -13,7 +13,8 @@
     <button class="btn danger difficulty-button" type="button" @click="handleEasyCapitalClick" v-if='this.clickedQuiz === "capital"' name="easy-capital-button">Easy</button>
     <button class="btn danger difficulty-button" type="button" @click="handleHardCapitalClick" v-if='this.clickedQuiz === "capital"' name="hard-capital-button">Hard</button>
 
-  
+    <button class="btn orange difficulty-button" type="button" @click="handleEasyFlagClick" v-if='this.clickedQuiz === "flag"' name="easy-flag-button">Easy</button>
+    <button class="btn orange difficulty-button" type="button" @click="handleHardFlagClick" v-if='this.clickedQuiz === "flag"' name="hard-flag-button">Hard</button>
   </div>
 </template>
 
@@ -37,6 +38,11 @@ export default {
 
     handleCapitalClick(){
       this.clickedQuiz = "capital"
+      this.key += 1
+    },
+
+    handleFlagClick() {
+      this.clickedQuiz = "flag"
       this.key += 1
     },
 
@@ -68,9 +74,18 @@ export default {
       this.quizCurrentlySelected = false
     },
 
-    handleFlagClick() {
+    handleEasyFlagClick() {
       this.clickedQuiz = null
-      eventBus.$emit('flag-quiz-selected')
+      this.key += 1
+      // eventBus.$emit('flag-quiz-selected')  !!!!!!!!
+      eventBus.$emit('easy-flag-quiz-selected')
+      this.quizCurrentlySelected = false
+    },
+
+    handleHardFlagClick() {
+      this.clickedQuiz = null
+      this.key += 1
+      eventBus.$emit('hard-flag-quiz-selected')
       this.quizCurrentlySelected = false
     }
   }
@@ -79,8 +94,10 @@ export default {
 
 <style lang="css" scoped>
 .button-choices p {
-  font-size: 2em;
+  font-size: 26px;
+  margin-top: 0px;
 }
+
 
 .btn {
   border: 2px solid black;
@@ -96,7 +113,7 @@ export default {
 .success {
   border-color: #4CAF50;
   color: green;
-  margin-right: 10px
+  margin: 5px
 }
 
 .success:hover {
@@ -108,7 +125,7 @@ export default {
 .danger {
   border-color: #f44336;
   color: red;
-  margin-right: 10px;
+  margin: 5px;
 }
 
 .danger:hover {
@@ -119,6 +136,7 @@ export default {
 .orange{
   border-color: orange;
   color: orange;
+  margin: 5px;
 }
 
 .orange:hover {

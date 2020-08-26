@@ -37,16 +37,14 @@
     methods: {
       checkAnswer() {
         if ( this.selectedQuiz.slice(0, 1) === 'h') {
-          if (this.selectedAnswer === this.correctAnswer.name) {
-            console.log(this.quizScore);
+          if (this.selectedAnswer === this.correctAnswer.name && this.selectedAnswer != null) {
             this.quizScore += 1
             return "Correct!"
           } else {
             return "Incorrect"
           }
         } else if ( this.selectedQuiz.slice(0, 1) === 'e'){
-          if (this.selectedAnswer === this.correctAnswer) {
-            console.log(this.quizScore);
+          if (this.selectedAnswer === this.correctAnswer && this.selectedAnswer != null) {
             this.quizScore += 1
             return "Correct!"
           } else {
@@ -55,36 +53,45 @@
         }
       },
       handleNextQuestion(){
-        eventBus.$emit('next-question', this.selectedQuiz)
         this.selectedAnswer = null
+        eventBus.$emit('next-question', this.selectedQuiz)
       }
     },
     mounted() {
       eventBus.$on('select-more-info', (selectedAnswer) => {
-        console.log("selected answer", selectedAnswer)
-        console.log("selected quiz", this.selectedQuiz.slice(0, 1))
-
         if ( this.selectedQuiz.slice(0, 1) === 'h') {
           const selectedCountry = this.randomCountries.find(country => country.alpha2Code === selectedAnswer)
           this.selectedAnswer = selectedCountry.name
         }
         else {
           this.selectedAnswer = selectedAnswer
-          // console.log("hi")
         }
+        // this.checkAnswer()
       })
 
       eventBus.$on('easy-country-quiz-selected', () => {
         this.selectedAnswer = null
+        this.quizScore = 0
       })
       eventBus.$on('hard-country-quiz-selected', () => {
         this.selectedAnswer = null
+        this.quizScore = 0
       })
       eventBus.$on('easy-capital-quiz-selected', () => {
         this.selectedAnswer = null
+        this.quizScore = 0
       })
       eventBus.$on('hard-capital-quiz-selected', () => {
         this.selectedAnswer = null
+        this.quizScore = 0
+      })
+      eventBus.$on('easy-flag-quiz-selected', () => {
+        this.selectedAnswer = null
+        this.quizScore = 0
+      })
+      eventBus.$on('hard-flag-quiz-selected', () => {
+        this.selectedAnswer = null
+        this.quizScore = 0
       })
     }
   }

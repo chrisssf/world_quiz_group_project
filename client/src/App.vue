@@ -38,6 +38,7 @@ import Answers from './components/Answer.vue'
 import {eventBus} from './main.js'
 import CountryService from './services/CountriesService.js'
 import CapitalsService from './services/CapitalsService.js'
+import FlagsService from './services/FlagsService.js' //!!!!!!!
 import apiKey from './apikey.js'
 
 
@@ -111,6 +112,25 @@ export default {
         return capitals
       })
       .then((capitals) => this.correctAnswer = capitals[questionNumber].Answer)
+      .then(() => this.componentKey += 1)
+    },
+
+    fetchFlagData(questionNumber) {
+      FlagsService.getFlags()
+      // .then(countries => countries)
+      .then((flags) => {
+        this.options = flags[questionNumber].Options
+
+        console.log("options", this.options)
+        return flags
+      })
+      .then((flags) => {
+        this.question = flags[questionNumber].Question
+
+        console.log("question", this.question)
+        return flags
+      })
+      .then((flags) => this.correctAnswer = flags[questionNumber].Answer)
       .then(() => this.componentKey += 1)
     },
 
@@ -215,12 +235,21 @@ export default {
 
     })
 
-    eventBus.$on('flag-quiz-selected', () =>{
+    eventBus.$on('hard-flag-quiz-selected', () =>{ 
       this.correctAnswer = null
       this.options = null
-      this.selectedQuiz = "flags"
+      this.selectedQuiz = "hardFlags"
       this.questionCounter = 0
       this.getRandomFlags()
+    })
+
+ 
+    eventBus.$on('easy-flag-quiz-selected', () => {
+      this.correctAnswer = null
+      this.options = null
+      this.selectedQuiz = "easyFlags"
+      this.questionCounter = 1
+      this.fetchFlagData(0)
     })
 
     eventBus.$on('select-more-info', countryCode => {
@@ -239,7 +268,7 @@ export default {
       else if (selectedQuiz === "hardCapitals"){
         this.getRandomCapitals()
       }
-      else if (selectedQuiz === "flags"){
+      else if (selectedQuiz === "hardFlags"){ //!!!!!!!!!!
         this.getRandomFlags()
       }
       else if (selectedQuiz === "easyCountries"){
@@ -248,6 +277,9 @@ export default {
       }
       else if (selectedQuiz === "easyCapitals"){
         this.fetchCapitalData(this.questionCounter)
+      }
+      else if (selectedQuiz === "easyFlags"){ //!!!!!!!!
+        this.fetchFlagData(this.questionCounter)
       }
       this.questionCounter += 1;
     })
@@ -287,7 +319,7 @@ body {
 
 .col-2{
   text-align: center;
-  justify-content: center;
+  justify-content: cetnter;
 }
 
 .map {
@@ -298,7 +330,7 @@ body {
 
 .map-info-box{
   margin: auto;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 /* .map-info-box{
